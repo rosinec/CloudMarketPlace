@@ -1,12 +1,14 @@
+import { useCallback } from 'react';
 import Flag from 'react-flagkit';
 
 import { useLanguage } from '../hooks/useTranslation';
 
 const LanguageSwitch = () => {
 	const [language, setLanguage] = useLanguage();
-	const changeLanguage = (lang: 'cs' | 'en') => {
+	const changeLanguage = useCallback((lang: 'cs' | 'en') => {
 		setLanguage(language !== lang ? lang : language);
-	};
+	}, []);
+
 	return (
 		<>
 			<Flag

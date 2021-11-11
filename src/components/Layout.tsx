@@ -7,13 +7,14 @@ import { signOut } from '../utils/firebase';
 import { useTranslation } from '../hooks/useTranslation';
 
 import LanguageSwitch from './LanguageSwitch';
+import ThemeButton from './ThemeButton';
 
 const Layout: FC = ({ children }) => {
 	const user = useLoggedInUser();
 	const t = useTranslation();
 	return (
 		<>
-			<AppBar position="fixed">
+			<AppBar color="default" position="fixed">
 				<Container maxWidth="sm">
 					<Toolbar disableGutters sx={{ gap: 2 }}>
 						<Button component={Link} to="/">
@@ -21,6 +22,7 @@ const Layout: FC = ({ children }) => {
 						</Button>
 						<Box sx={{ flexGrow: 1 }} />
 						<LanguageSwitch />
+						<ThemeButton />
 						{!user ? (
 							<Button component={Link} to="/login">
 								{t('layout.login')}

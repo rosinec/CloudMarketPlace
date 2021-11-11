@@ -1,16 +1,16 @@
-import { CssBaseline, ThemeProvider } from '@mui/material';
+import { CssBaseline } from '@mui/material';
 import { BrowserRouter } from 'react-router-dom';
 
-import theme from './utils/theme';
 import { LanguageProvider } from './hooks/useTranslation';
 import Layout from './components/Layout';
 import Routes from './components/Routes';
 import { UserProvider } from './hooks/useLoggedInUser';
+import { ThemeProvider } from './hooks/useTheme';
 
 const App = () => (
 	<UserProvider>
 		<LanguageProvider>
-			<ThemeProvider theme={theme}>
+			<ThemeProvider>
 				<BrowserRouter>
 					<CssBaseline />
 					<Layout>
