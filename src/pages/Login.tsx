@@ -9,10 +9,10 @@ import { useTranslation } from '../hooks/useTranslation';
 import { signIn, signUp } from '../utils/firebase';
 
 const Login = () => {
-	usePageTitle('Login');
+	const t = useTranslation();
+	usePageTitle(t('layout.login'));
 
 	const { push } = useHistory();
-	const t = useTranslation();
 
 	const [isSignUp, setSignUp] = useState(false);
 

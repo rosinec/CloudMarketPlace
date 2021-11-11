@@ -8,8 +8,8 @@ type Props = {
 };
 
 const Home = ({ username }: Props) => {
-	usePageTitle('Home');
 	const t = useTranslation();
+	usePageTitle(t('layout.home'));
 
 	return (
 		<>

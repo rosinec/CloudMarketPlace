@@ -8,5 +8,6 @@ export default {
 	'login.password': 'Heslo',
 	'layout.home': 'Domů',
 	'layout.login': 'Přihlášení',
-	'layout.logout': 'Odhlásit'
+	'layout.logout': 'Odhlásit',
+	'layout.notFound': 'Nenalezeno'
 };
