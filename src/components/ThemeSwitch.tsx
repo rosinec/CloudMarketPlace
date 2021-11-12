@@ -1,18 +1,26 @@
-import { FC, useCallback } from 'react';
-import { Switch } from '@mui/material';
+import { FC, useCallback, useMemo } from 'react';
+import { IconButton, Tooltip } from '@mui/material';
+import { DarkMode, LightMode } from '@mui/icons-material';
 
 import { useTheme } from '../hooks/useTheme';
 
 const ThemeButton: FC = () => {
-	const [_, setMode] = useTheme();
-	const handleThemeChange = useCallback(
-		(event: React.ChangeEvent<HTMLInputElement>) => {
-			const { checked } = event.target;
-			setMode(checked ? 'light' : 'dark');
-		},
-		[]
+	const [mode, setMode] = useTheme();
+	const isDark = useMemo(() => mode === 'dark', [mode]);
+	const changeMode = useCallback((dark: boolean) => {
+		setMode(dark ? 'light' : 'dark');
+	}, []);
+	return (
+		<Tooltip title={isDark ? 'Light Mode' : 'Dark Mode'}>
+			<IconButton size="large" onClick={() => changeMode(isDark)}>
+				{isDark ? (
+					<LightMode fontSize="inherit" />
+				) : (
+					<DarkMode fontSize="inherit" />
+				)}
+			</IconButton>
+		</Tooltip>
 	);
-	return <Switch defaultChecked color="default" onChange={handleThemeChange} />;
 };
 
 export default ThemeButton;

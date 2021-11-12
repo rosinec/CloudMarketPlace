@@ -17,10 +17,9 @@ type ThemeState = [Themes, Dispatch<SetStateAction<Themes>>];
 export const ThemeContext = createContext<ThemeState>(undefined as never);
 
 export const ThemeProvider: FC = ({ children }) => {
-	const modeUtils = useState<Themes>('light');
-	const [mode, _] = modeUtils;
+	const [mode, setMode] = useState<Themes>('dark');
 	return (
-		<ThemeContext.Provider value={modeUtils}>
+		<ThemeContext.Provider value={[mode, setMode]}>
 			<MuiThemeProvider theme={theme(mode)}>{children}</MuiThemeProvider>
 		</ThemeContext.Provider>
 	);
