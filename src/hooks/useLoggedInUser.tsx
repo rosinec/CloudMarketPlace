@@ -1,20 +1,35 @@
-import { createContext, FC, useContext, useEffect, useState } from 'react';
+import {
+	createContext,
+	Dispatch,
+	FC,
+	SetStateAction,
+	useContext,
+	useEffect,
+	useState
+} from 'react';
 import { User } from 'firebase/auth';
 
 import { onAuthChanged } from '../utils/firebase';
 
-const UserContext = createContext<User | null>(null);
+type Users = User | null;
+type UserState = [Users, Dispatch<SetStateAction<Users>>];
+const UserContext = createContext<UserState>(undefined as never);
 
 export const UserProvider: FC = ({ children }) => {
 	// We can improve this by saving and loading the initial state from local storage
-	const [userState, setUserState] = useState<User | null>(null);
+	const [user, setUser] = useState<Users>(null);
 	// Setup onAuthChanged once when component is mounted
 	useEffect(() => {
-		onAuthChanged(u => setUserState(u));
+		onAuthChanged(u => setUser(u));
 	}, []);
 	return (
-		<UserContext.Provider value={userState}>{children}</UserContext.Provider>
+		<UserContext.Provider value={[user, setUser]}>
+			{children}
+		</UserContext.Provider>
 	);
 };
 
-export const useLoggedInUser = () => useContext(UserContext);
+export const useLoggedInUser = () => {
+	const [user] = useContext(UserContext);
+	return user;
+};
