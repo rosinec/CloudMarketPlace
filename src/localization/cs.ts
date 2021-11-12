@@ -9,5 +9,7 @@ export default {
 	'layout.home': 'Domů',
 	'layout.login': 'Přihlášení',
 	'layout.logout': 'Odhlásit',
-	'layout.notFound': 'Nenalezeno'
+	'layout.notFound': 'Nenalezeno',
+	'theme.light': 'Světlé téma',
+	'theme.dark': 'Tmavé téma'
 };
