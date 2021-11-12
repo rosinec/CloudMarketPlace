@@ -1,35 +1,23 @@
-import { useCallback } from 'react';
+import { IconButton, Tooltip } from '@mui/material';
+import { useCallback, useMemo } from 'react';
 import Flag from 'react-flagkit';
 
-import { useLanguage } from '../hooks/useTranslation';
+import { useLanguage, useTranslation } from '../hooks/useTranslation';
 
 const LanguageSwitch = () => {
+	const t = useTranslation();
 	const [language, setLanguage] = useLanguage();
-	const changeLanguage = useCallback((lang: 'cs' | 'en') => {
-		setLanguage(language !== lang ? lang : language);
+	const isCzech = useMemo(() => language === 'cs', [language]);
+	const changeLanguage = useCallback(czech => {
+		setLanguage(czech ? 'en' : 'cs');
 	}, []);
 
 	return (
-		<>
-			<Flag
-				country="GB"
-				role="button"
-				onClick={() => changeLanguage('en')}
-				style={{
-					filter: `saturate(${language === 'en' ? 0.1 : 1})`,
-					cursor: `${language === 'en' ? '' : 'pointer'}`
-				}}
-			/>
-			<Flag
-				country="CZ"
-				role="button"
-				onClick={() => changeLanguage('cs')}
-				style={{
-					filter: `saturate(${language === 'cs' ? 0.1 : 1})`,
-					cursor: `${language === 'cs' ? '' : 'pointer'}`
-				}}
-			/>
-		</>
+		<Tooltip title={isCzech ? t('language.en') : t('language.cs')}>
+			<IconButton size="large" onClick={() => changeLanguage(isCzech)}>
+				<Flag country={isCzech ? 'GB' : 'CZ'} />
+			</IconButton>
+		</Tooltip>
 	);
 };
 

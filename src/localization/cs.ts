@@ -11,5 +11,7 @@ export default {
 	'layout.logout': 'Odhlásit',
 	'layout.notFound': 'Nenalezeno',
 	'theme.light': 'Světlé téma',
-	'theme.dark': 'Tmavé téma'
+	'theme.dark': 'Tmavé téma',
+	'language.cs': 'Čeština',
+	'language.en': 'Angličtina'
 };

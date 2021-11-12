@@ -11,5 +11,7 @@ export default {
 	'layout.logout': 'Logout',
 	'layout.notFound': 'Not Found',
 	'theme.light': 'Light theme',
-	'theme.dark': 'Dark theme'
+	'theme.dark': 'Dark theme',
+	'language.cs': 'Czech',
+	'language.en': 'English'
 };
