@@ -2,10 +2,10 @@ import { FC, useCallback, useMemo } from 'react';
 import { IconButton, Tooltip } from '@mui/material';
 import { DarkMode, LightMode } from '@mui/icons-material';
 
-import { useTheme } from '../hooks/useTheme';
-import { useTranslation } from '../hooks/useTranslation';
+import { useTheme } from '../../hooks/useTheme';
+import { useTranslation } from '../../hooks/useTranslation';
 
-const ThemeButton: FC = () => {
+const ThemeSwitch: FC = () => {
 	const t = useTranslation();
 	const [mode, setMode] = useTheme();
 	const isDark = useMemo(() => mode === 'dark', [mode]);
@@ -14,7 +14,11 @@ const ThemeButton: FC = () => {
 	}, []);
 	return (
 		<Tooltip title={isDark ? t('theme.light') : t('theme.dark')}>
-			<IconButton size="large" onClick={() => changeMode(isDark)}>
+			<IconButton
+				size="large"
+				onClick={() => changeMode(isDark)}
+				sx={{ p: '0' }}
+			>
 				{isDark ? (
 					<LightMode fontSize="inherit" />
 				) : (
@@ -25,4 +29,4 @@ const ThemeButton: FC = () => {
 	);
 };
 
-export default ThemeButton;
+export default ThemeSwitch;

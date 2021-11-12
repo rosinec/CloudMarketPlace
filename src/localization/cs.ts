@@ -7,7 +7,7 @@ export default {
 	'login.email': 'Email',
 	'login.password': 'Heslo',
 	'layout.home': 'Domů',
-	'layout.login': 'Přihlášení',
+	'layout.login': 'Přihlásit',
 	'layout.logout': 'Odhlásit',
 	'layout.notFound': 'Nenalezeno',
 	'theme.light': 'Světlé téma',

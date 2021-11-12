@@ -2,7 +2,7 @@ import { IconButton, Tooltip } from '@mui/material';
 import { useCallback, useMemo } from 'react';
 import Flag from 'react-flagkit';
 
-import { useLanguage, useTranslation } from '../hooks/useTranslation';
+import { useLanguage, useTranslation } from '../../hooks/useTranslation';
 
 const LanguageSwitch = () => {
 	const t = useTranslation();
@@ -14,7 +14,11 @@ const LanguageSwitch = () => {
 
 	return (
 		<Tooltip title={isCzech ? t('language.en') : t('language.cs')}>
-			<IconButton size="large" onClick={() => changeLanguage(isCzech)}>
+			<IconButton
+				size="large"
+				onClick={() => changeLanguage(isCzech)}
+				sx={{ p: '0' }}
+			>
 				<Flag country={isCzech ? 'GB' : 'CZ'} />
 			</IconButton>
 		</Tooltip>
