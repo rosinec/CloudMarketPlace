@@ -48,8 +48,14 @@ const Login = () => {
 			<Typography variant="h4" component="h2" textAlign="center" mb={3}>
 				{t('login.signIn')}
 			</Typography>
-			<TextField label={t('login.email')} {...usernameProps} type="email" />
 			<TextField
+				autoComplete="on"
+				label={t('login.email')}
+				{...usernameProps}
+				type="email"
+			/>
+			<TextField
+				autoComplete="on"
 				label={t('login.password')}
 				{...passwordProps}
 				type="password"
