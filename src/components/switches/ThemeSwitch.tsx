@@ -15,7 +15,7 @@ const ThemeSwitch: FC = () => {
 	return (
 		<Tooltip title={isDark ? t('theme.light') : t('theme.dark')}>
 			<IconButton
-				size="large"
+				size="small"
 				onClick={() => changeMode(isDark)}
 				sx={{ p: '0' }}
 			>

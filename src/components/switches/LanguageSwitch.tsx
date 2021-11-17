@@ -15,11 +15,11 @@ const LanguageSwitch = () => {
 	return (
 		<Tooltip title={isCzech ? t('language.en') : t('language.cs')}>
 			<IconButton
-				size="large"
+				size="small"
 				onClick={() => changeLanguage(isCzech)}
 				sx={{ p: '0' }}
 			>
-				<Flag country={isCzech ? 'GB' : 'CZ'} />
+				<Flag size={20} country={isCzech ? 'GB' : 'CZ'} />
 			</IconButton>
 		</Tooltip>
 	);
