@@ -8,7 +8,6 @@ export default {
 	'login.password': 'Password',
 	'layout.home': 'Home',
 	'layout.login': 'Login',
-	'layout.logout': 'Logout',
 	'layout.notFound': 'Not Found',
 	'theme.light': 'Light theme',
 	'theme.dark': 'Dark theme',

@@ -8,7 +8,6 @@ export default {
 	'login.password': 'Heslo',
 	'layout.home': 'Domů',
 	'layout.login': 'Přihlásit',
-	'layout.logout': 'Odhlásit',
 	'layout.notFound': 'Nenalezeno',
 	'theme.light': 'Světlé téma',
 	'theme.dark': 'Tmavé téma',
