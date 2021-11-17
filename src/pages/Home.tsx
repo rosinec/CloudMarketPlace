@@ -5,9 +5,10 @@ import { useTranslation } from '../hooks/useTranslation';
 
 type Props = {
 	username?: string;
+	isAdmin?: boolean;
 };
 
-const Home = ({ username }: Props) => {
+const Home = ({ username, isAdmin }: Props) => {
 	const t = useTranslation();
 	usePageTitle(t('layout.home'));
 
@@ -19,6 +20,7 @@ const Home = ({ username }: Props) => {
 					{`${t('home.welcome')} ${username}`}!
 				</Typography>
 			)}
+			<p>{`You are ${isAdmin ? '' : 'not'} an ADMIN`}</p>
 		</>
 	);
 };

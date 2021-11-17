@@ -12,7 +12,9 @@ const Routes = () => {
 			<Route
 				path="/"
 				exact
-				render={() => <Home username={user?.email ?? undefined} />}
+				render={() => (
+					<Home username={user?.email ?? undefined} isAdmin={user?.isAdmin} />
+				)}
 			/>
 			{!user && <Route path="/login" exact component={Login} />}
 			<Route component={NotFound} />

@@ -7,6 +7,11 @@ import {
 	onAuthStateChanged,
 	User
 } from 'firebase/auth';
+import {
+	collection,
+	CollectionReference,
+	getFirestore
+} from 'firebase/firestore';
 
 // Initialize Firebase
 initializeApp({
@@ -35,3 +40,16 @@ export const signOut = () => authSignOut(auth);
 // Subscribe to auth state changes
 export const onAuthChanged = (callback: (u: User | null) => void) =>
 	onAuthStateChanged(auth, callback);
+
+// Firestore
+const db = getFirestore();
+
+// Reviews collection
+export type Admin = {
+	uid: string;
+};
+
+export const adminsCollection = collection(
+	db,
+	'admins'
+) as CollectionReference<Admin>;
