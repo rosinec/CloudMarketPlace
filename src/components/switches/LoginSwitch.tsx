@@ -8,7 +8,7 @@ import { useLoggedInUser } from '../../hooks/useLoggedInUser';
 import { signOut } from '../../utils/firebase';
 
 const LoginSwitch: FC = () => {
-	const user = useLoggedInUser();
+	const [user] = useLoggedInUser();
 	return (
 		// eslint-disable-next-line react/jsx-no-useless-fragment
 		<>

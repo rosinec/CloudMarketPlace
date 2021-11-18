@@ -6,16 +6,10 @@ import Login from '../pages/Login';
 import NotFound from '../pages/NotFound';
 
 const Routes = () => {
-	const user = useLoggedInUser();
+	const [user] = useLoggedInUser();
 	return (
 		<Switch>
-			<Route
-				path="/"
-				exact
-				render={() => (
-					<Home username={user?.email ?? undefined} isAdmin={user?.isAdmin} />
-				)}
-			/>
+			<Route path="/" exact component={Home} />
 			{!user && <Route path="/login" exact component={Login} />}
 			<Route component={NotFound} />
 		</Switch>
