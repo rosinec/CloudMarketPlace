@@ -16,11 +16,9 @@ export const UserProvider: FC = ({ children }) => {
 	// Setup onAuthChanged once when component is mounted
 	useEffect(() => {
 		onAuthChanged(u => {
-			setIsLoading(true);
 			setUser(u);
-			if (u === null) {
-				setIsLoading(false);
-			} else {
+			if (u !== null) {
+				setIsLoading(true);
 				getDoc(adminsDocument(String(u?.email))).then(data => {
 					setIsAdmin(data.exists());
 					setIsLoading(false);
