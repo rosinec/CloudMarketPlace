@@ -1,38 +1,46 @@
-import { createContext, FC, useContext, useEffect, useState } from 'react';
+import {
+	createContext,
+	FC,
+	useContext,
+	useEffect,
+	useMemo,
+	useState
+} from 'react';
 import { User } from 'firebase/auth';
-import { getDoc } from 'firebase/firestore';
+import { onSnapshot } from 'firebase/firestore';
 
-import { adminsDocument, onAuthChanged } from '../utils/firebase';
+import { Admin, adminsCollection, onAuthChanged } from '../utils/firebase';
 
 type CustomUser = (User & { isAdmin: boolean }) | null;
 type Users = User | null;
-const UserContext = createContext<[CustomUser, boolean]>(undefined as never);
+const UserContext = createContext<CustomUser>(undefined as never);
 
 export const UserProvider: FC = ({ children }) => {
 	// We can improve this by saving and loading the initial state from local storage
 	const [user, setUser] = useState<Users>(null);
-	const [isAdmin, setIsAdmin] = useState<boolean>(false);
-	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [adminIds, setAdminIds] = useState<Admin[]>([]);
+	const isAdmin = useMemo(
+		() => !!adminIds.find(adminId => adminId === user?.email),
+		[user, adminIds]
+	);
+
+	useEffect(() => {
+		const unsubscribe = onSnapshot(adminsCollection, snapshot => {
+			setAdminIds(snapshot.docs.map(data => data.id));
+		});
+		return () => {
+			unsubscribe();
+		};
+	}, []);
+
 	// Setup onAuthChanged once when component is mounted
 	useEffect(() => {
-		onAuthChanged(u => {
-			setUser(u);
-			if (u !== null) {
-				setIsLoading(true);
-				getDoc(adminsDocument(String(u?.email))).then(data => {
-					setIsAdmin(data.exists());
-					setIsLoading(false);
-				});
-			}
-		});
+		onAuthChanged(u => setUser(u));
 	}, []);
 
 	return (
 		<UserContext.Provider
-			value={[
-				user ? ({ ...user, isAdmin: isAdmin ?? false } as CustomUser) : null,
-				isLoading
-			]}
+			value={user ? ({ ...user, isAdmin } as CustomUser) : null}
 		>
 			{children}
 		</UserContext.Provider>

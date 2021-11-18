@@ -10,8 +10,6 @@ import {
 import {
 	collection,
 	CollectionReference,
-	doc,
-	DocumentReference,
 	getFirestore
 } from 'firebase/firestore';
 
@@ -53,6 +51,3 @@ export const adminsCollection = collection(
 	db,
 	'admins'
 ) as CollectionReference<Admin>;
-
-export const adminsDocument = (id: string) =>
-	doc(db, 'admins', id) as DocumentReference<Admin>;

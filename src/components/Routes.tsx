@@ -6,7 +6,7 @@ import Login from '../pages/Login';
 import NotFound from '../pages/NotFound';
 
 const Routes = () => {
-	const [user] = useLoggedInUser();
+	const user = useLoggedInUser();
 	return (
 		<Switch>
 			<Route path="/" exact component={Home} />
