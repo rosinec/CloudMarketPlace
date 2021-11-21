@@ -12,7 +12,7 @@ const Layout: FC = ({ children }) => {
 	const t = useTranslation();
 	return (
 		<>
-			<AppBar color="default" position="fixed">
+			<AppBar color="default" position="sticky">
 				<Container maxWidth="lg">
 					<Toolbar disableGutters sx={{ gap: 2 }}>
 						<Button component={Link} to="/">
@@ -30,13 +30,7 @@ const Layout: FC = ({ children }) => {
 				maxWidth="lg"
 				component="main"
 				sx={{
-					display: 'flex',
-					flexDirection: 'column',
-					justifyContent: 'center',
-					alignItems: 'center',
-					height: '100vh',
-					pt: 8,
-					gap: 2
+					py: 3
 				}}
 			>
 				{children}
