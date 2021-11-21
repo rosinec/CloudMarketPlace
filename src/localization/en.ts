@@ -13,5 +13,8 @@ export default {
 	'theme.light': 'Light theme',
 	'theme.dark': 'Dark theme',
 	'language.cs': 'Czech',
-	'language.en': 'English'
+	'language.en': 'English',
+	'app.web': 'Website',
+	'app.docs': 'Documentation',
+	'app.more': 'Show more..'
 };

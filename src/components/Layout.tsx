@@ -13,7 +13,7 @@ const Layout: FC = ({ children }) => {
 	return (
 		<>
 			<AppBar color="default" position="fixed">
-				<Container maxWidth="sm">
+				<Container maxWidth="lg">
 					<Toolbar disableGutters sx={{ gap: 2 }}>
 						<Button component={Link} to="/">
 							{t('layout.home')}
@@ -27,7 +27,7 @@ const Layout: FC = ({ children }) => {
 			</AppBar>
 
 			<Container
-				maxWidth="sm"
+				maxWidth="lg"
 				component="main"
 				sx={{
 					display: 'flex',

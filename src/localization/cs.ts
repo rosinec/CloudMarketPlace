@@ -13,5 +13,8 @@ export default {
 	'theme.light': 'Světlé téma',
 	'theme.dark': 'Tmavé téma',
 	'language.cs': 'Čeština',
-	'language.en': 'Angličtina'
+	'language.en': 'Angličtina',
+	'app.web': 'Webová stránka',
+	'app.docs': 'Dokumentace',
+	'app.more': 'Ukázat více..'
 };

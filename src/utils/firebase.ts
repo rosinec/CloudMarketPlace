@@ -51,3 +51,17 @@ export const adminsCollection = collection(
 	db,
 	'admins'
 ) as CollectionReference<Admin>;
+
+export type App = {
+	name: string;
+	connection_info: string;
+	description: string;
+	documentation: string;
+	tags: string[];
+	website: string;
+};
+
+export const appsCollection = collection(
+	db,
+	'apps'
+) as CollectionReference<App>;
