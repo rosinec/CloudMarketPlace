@@ -8,6 +8,7 @@ import {
 	CardActions,
 	Chip
 } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 import { useTranslation } from '../hooks/useTranslation';
 import { App } from '../utils/firebase';
@@ -63,7 +64,12 @@ const AppCard: FC<App> = ({
 					{t('app.docs')}
 				</Button>
 			</CardActions>
-			<Button variant="contained" fullWidth>
+			<Button
+				variant="contained"
+				fullWidth
+				component={Link}
+				to={`apps/${name}`}
+			>
 				{t('app.more')}
 			</Button>
 		</Card>
