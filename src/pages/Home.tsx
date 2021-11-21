@@ -14,7 +14,7 @@ const Home = () => {
 	const loading = useAppsLoading();
 
 	return (
-		<Box sx={{ display: 'flex', justifyContent: 'center' }}>
+		<Box>
 			{loading ? (
 				<CircularProgress />
 			) : (

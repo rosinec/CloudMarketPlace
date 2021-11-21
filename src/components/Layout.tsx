@@ -1,8 +1,16 @@
 import { FC } from 'react';
-import { AppBar, Container, Toolbar, Button, Box } from '@mui/material';
+import {
+	AppBar,
+	Container,
+	Toolbar,
+	Button,
+	Box,
+	CircularProgress
+} from '@mui/material';
 import { Link } from 'react-router-dom';
 
 import { useTranslation } from '../hooks/useTranslation';
+import { useUsersLoading } from '../hooks/useLoggedInUser';
 
 import LanguageSwitch from './switches/LanguageSwitch';
 import ThemeSwitch from './switches/ThemeSwitch';
@@ -10,6 +18,7 @@ import LoginSwitch from './switches/LoginSwitch';
 
 const Layout: FC = ({ children }) => {
 	const t = useTranslation();
+	const userLoading = useUsersLoading();
 	return (
 		<>
 			<AppBar color="default" position="sticky">
@@ -30,10 +39,12 @@ const Layout: FC = ({ children }) => {
 				maxWidth="lg"
 				component="main"
 				sx={{
-					py: 3
+					py: 3,
+					display: 'flex',
+					justifyContent: 'center'
 				}}
 			>
-				{children}
+				{userLoading ? <CircularProgress /> : children}
 			</Container>
 		</>
 	);
