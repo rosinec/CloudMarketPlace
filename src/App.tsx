@@ -6,17 +6,20 @@ import Layout from './components/Layout';
 import Routes from './components/Routes';
 import { UserProvider } from './hooks/useLoggedInUser';
 import { ThemeProvider } from './hooks/useTheme';
+import { AppProvider } from './hooks/useApps';
 
 const App = () => (
 	<UserProvider>
 		<LanguageProvider>
 			<ThemeProvider>
-				<BrowserRouter>
-					<CssBaseline />
-					<Layout>
-						<Routes />
-					</Layout>
-				</BrowserRouter>
+				<AppProvider>
+					<BrowserRouter>
+						<CssBaseline />
+						<Layout>
+							<Routes />
+						</Layout>
+					</BrowserRouter>
+				</AppProvider>
 			</ThemeProvider>
 		</LanguageProvider>
 	</UserProvider>

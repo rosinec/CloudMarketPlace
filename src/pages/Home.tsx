@@ -1,26 +1,15 @@
-import { onSnapshot } from '@firebase/firestore';
 import { Grid } from '@mui/material';
-import { useEffect, useState } from 'react';
 
 import AppCard from '../components/AppCard';
+import { useApp } from '../hooks/useApps';
 import usePageTitle from '../hooks/usePageTitle';
 import { useTranslation } from '../hooks/useTranslation';
-import { App, appsCollection } from '../utils/firebase';
 
 const Home = () => {
 	const t = useTranslation();
 	usePageTitle(t('layout.home'));
 
-	const [apps, setApps] = useState<App[]>([]);
-
-	useEffect(() => {
-		const unsubscribe = onSnapshot(appsCollection, snapshot => {
-			setApps(snapshot.docs.map(doc => doc.data()));
-		});
-		return () => {
-			unsubscribe();
-		};
-	}, []);
+	const [apps] = useApp();
 
 	return (
 		<Grid container spacing={2}>
