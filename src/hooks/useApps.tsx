@@ -37,6 +37,5 @@ export const useApp = () => useContext(AppContext);
 
 export const useAppByName = (name: string) => {
 	const [apps] = useContext(AppContext);
-	console.log(name);
 	return apps.find(app => app.name === name) ?? apps[0];
 };
