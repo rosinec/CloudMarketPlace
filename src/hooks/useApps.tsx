@@ -47,3 +47,11 @@ export const useAppByName = (name: string) => {
 	const [apps] = useContext(AppContext);
 	return apps.find(app => app.name === name) ?? apps[0];
 };
+
+export const useTags = () => {
+	const [apps] = useContext(AppContext);
+	return apps.reduce((prev, curr) => {
+		curr.tags.forEach(tag => prev.add(tag));
+		return prev;
+	}, new Set<string>());
+};

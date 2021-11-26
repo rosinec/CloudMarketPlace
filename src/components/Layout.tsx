@@ -21,7 +21,11 @@ const Layout: FC = ({ children }) => {
 	const userLoading = useUsersLoading();
 	return (
 		<>
-			<AppBar color="default" position="sticky">
+			<AppBar
+				color="default"
+				position="sticky"
+				sx={{ zIndex: theme => theme.zIndex.drawer + 1 }}
+			>
 				<Container maxWidth="lg">
 					<Toolbar disableGutters sx={{ gap: 2 }}>
 						<Button component={Link} to="/">
@@ -35,17 +39,17 @@ const Layout: FC = ({ children }) => {
 				</Container>
 			</AppBar>
 
-			<Container
+			<Box
 				maxWidth="lg"
 				component="main"
 				sx={{
-					py: 3,
+					px: '0',
 					display: 'flex',
 					justifyContent: 'center'
 				}}
 			>
 				{userLoading ? <CircularProgress /> : children}
-			</Container>
+			</Box>
 		</>
 	);
 };
