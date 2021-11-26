@@ -13,7 +13,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 import { useTranslation } from '../hooks/useTranslation';
 import { useUsersLoading } from '../hooks/useLoggedInUser';
-import { useDrawer } from '../hooks/useDrawer';
+import { useFilterDrawer } from '../hooks/useFilterDrawer';
 
 import LanguageSwitch from './switches/LanguageSwitch';
 import ThemeSwitch from './switches/ThemeSwitch';
@@ -23,7 +23,7 @@ const Layout: FC = ({ children }) => {
 	const t = useTranslation();
 	const userLoading = useUsersLoading();
 
-	const [, handleDrawerToggle] = useDrawer();
+	const [, handleDrawerToggle] = useFilterDrawer();
 	const location = useLocation();
 	const showDrawer = location.pathname === '/';
 

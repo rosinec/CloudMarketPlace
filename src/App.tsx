@@ -7,21 +7,21 @@ import Routes from './components/Routes';
 import { UserProvider } from './hooks/useLoggedInUser';
 import { ThemeProvider } from './hooks/useTheme';
 import { AppProvider } from './hooks/useApps';
-import { DrawerProvider } from './hooks/useDrawer';
+import { FilterDrawerProvider } from './hooks/useFilterDrawer';
 
 const App = () => (
 	<UserProvider>
 		<LanguageProvider>
 			<ThemeProvider>
 				<AppProvider>
-					<DrawerProvider>
+					<FilterDrawerProvider>
 						<BrowserRouter>
 							<CssBaseline />
 							<Layout>
 								<Routes />
 							</Layout>
 						</BrowserRouter>
-					</DrawerProvider>
+					</FilterDrawerProvider>
 				</AppProvider>
 			</ThemeProvider>
 		</LanguageProvider>

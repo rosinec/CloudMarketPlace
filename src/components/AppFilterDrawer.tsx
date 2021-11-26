@@ -11,11 +11,13 @@ import Divider from '@mui/material/Divider';
 import { Dispatch, SetStateAction } from 'react';
 
 import { useTags } from '../hooks/useApps';
-import { useDrawer } from '../hooks/useDrawer';
+import { useFilterDrawer } from '../hooks/useFilterDrawer';
+import {
+	DRAWER_WIDTH,
+	ITEM_HEIGHT,
+	ITEM_PADDING_TOP
+} from '../utils/constants';
 
-const drawerWidth = 200;
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
 const MenuProps = {
 	PaperProps: {
 		style: {
@@ -32,7 +34,7 @@ type Props = {
 
 const AppFilterDrawer = ({ tags, setTags }: Props) => {
 	const allTags = useTags();
-	const [mobileOpen, handleDrawerToggle] = useDrawer();
+	const [mobileOpen, handleDrawerToggle] = useFilterDrawer();
 
 	const handleChange = (event: SelectChangeEvent<string[]>) => {
 		const {
@@ -114,7 +116,7 @@ const AppFilterDrawer = ({ tags, setTags }: Props) => {
 	return (
 		<Box
 			component="nav"
-			sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+			sx={{ width: { sm: DRAWER_WIDTH }, flexShrink: { sm: 0 } }}
 			aria-label="mailbox folders"
 		>
 			{/* The implementation can be swapped with js to avoid SEO duplication of links. */}
@@ -128,7 +130,7 @@ const AppFilterDrawer = ({ tags, setTags }: Props) => {
 				}}
 				sx={{
 					'display': { xs: 'block', sm: 'none' },
-					'& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth }
+					'& .MuiDrawer-paper': { boxSizing: 'border-box', width: DRAWER_WIDTH }
 				}}
 			>
 				{drawer}
@@ -137,7 +139,7 @@ const AppFilterDrawer = ({ tags, setTags }: Props) => {
 				variant="permanent"
 				sx={{
 					'display': { xs: 'none', sm: 'block' },
-					'& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth }
+					'& .MuiDrawer-paper': { boxSizing: 'border-box', width: DRAWER_WIDTH }
 				}}
 				open
 			>
