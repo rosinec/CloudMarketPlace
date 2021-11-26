@@ -34,7 +34,7 @@ const Layout: FC = ({ children }) => {
 				position="sticky"
 				sx={{ zIndex: theme => theme.zIndex.drawer + 1 }}
 			>
-				<Container maxWidth="lg">
+				<Container maxWidth={false}>
 					<Toolbar disableGutters sx={{ gap: 2 }}>
 						{showDrawer && (
 							<IconButton
@@ -59,7 +59,6 @@ const Layout: FC = ({ children }) => {
 			</AppBar>
 
 			<Box
-				maxWidth="lg"
 				component="main"
 				sx={{
 					px: '0',

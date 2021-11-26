@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import { FC } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -8,10 +9,10 @@ const AppDetail: FC = () => {
 	const { description } = useAppByName(name);
 
 	return (
-		<div>
+		<Box maxWidth="lg">
 			<h1>{name}</h1>
 			<p>{description}</p>
-		</div>
+		</Box>
 	);
 };
 
