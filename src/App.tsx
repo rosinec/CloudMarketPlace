@@ -7,18 +7,21 @@ import Routes from './components/Routes';
 import { UserProvider } from './hooks/useLoggedInUser';
 import { ThemeProvider } from './hooks/useTheme';
 import { AppProvider } from './hooks/useApps';
+import { DrawerProvider } from './hooks/useDrawer';
 
 const App = () => (
 	<UserProvider>
 		<LanguageProvider>
 			<ThemeProvider>
 				<AppProvider>
-					<BrowserRouter>
-						<CssBaseline />
-						<Layout>
-							<Routes />
-						</Layout>
-					</BrowserRouter>
+					<DrawerProvider>
+						<BrowserRouter>
+							<CssBaseline />
+							<Layout>
+								<Routes />
+							</Layout>
+						</BrowserRouter>
+					</DrawerProvider>
 				</AppProvider>
 			</ThemeProvider>
 		</LanguageProvider>

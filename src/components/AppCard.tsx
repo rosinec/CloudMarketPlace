@@ -28,7 +28,15 @@ const AppCard: FC<App> = ({
 			? `${description.substring(0, DESCRIPTION_LENGTH)}...`
 			: description;
 	return (
-		<Card sx={{ maxWidth: 345 }}>
+		<Card
+			sx={{
+				maxWidth: 345,
+				height: '100%',
+				display: 'flex',
+				flexDirection: 'column',
+				justifyContent: 'space-between'
+			}}
+		>
 			<CardMedia
 				component="img"
 				height="140"
@@ -53,25 +61,27 @@ const AppCard: FC<App> = ({
 				</Typography>
 			</CardContent>
 
-			<CardActions>
-				<Button size="small" onClick={() => window.open(website, '_blank')}>
-					{t('app.web')}
-				</Button>
+			<div>
+				<CardActions>
+					<Button size="small" onClick={() => window.open(website, '_blank')}>
+						{t('app.web')}
+					</Button>
+					<Button
+						size="small"
+						onClick={() => window.open(documentation, '_blank')}
+					>
+						{t('app.docs')}
+					</Button>
+				</CardActions>
 				<Button
-					size="small"
-					onClick={() => window.open(documentation, '_blank')}
+					variant="contained"
+					fullWidth
+					component={Link}
+					to={`apps/${name}`}
 				>
-					{t('app.docs')}
+					{t('app.more')}
 				</Button>
-			</CardActions>
-			<Button
-				variant="contained"
-				fullWidth
-				component={Link}
-				to={`apps/${name}`}
-			>
-				{t('app.more')}
-			</Button>
+			</div>
 		</Card>
 	);
 };

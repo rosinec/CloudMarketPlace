@@ -5,12 +5,15 @@ import {
 	Toolbar,
 	Button,
 	Box,
-	CircularProgress
+	CircularProgress,
+	IconButton
 } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import MenuIcon from '@mui/icons-material/Menu';
 
 import { useTranslation } from '../hooks/useTranslation';
 import { useUsersLoading } from '../hooks/useLoggedInUser';
+import { useDrawer } from '../hooks/useDrawer';
 
 import LanguageSwitch from './switches/LanguageSwitch';
 import ThemeSwitch from './switches/ThemeSwitch';
@@ -19,6 +22,11 @@ import LoginSwitch from './switches/LoginSwitch';
 const Layout: FC = ({ children }) => {
 	const t = useTranslation();
 	const userLoading = useUsersLoading();
+
+	const [, handleDrawerToggle] = useDrawer();
+	const location = useLocation();
+	const showDrawer = location.pathname === '/';
+
 	return (
 		<>
 			<AppBar
@@ -26,8 +34,19 @@ const Layout: FC = ({ children }) => {
 				position="sticky"
 				sx={{ zIndex: theme => theme.zIndex.drawer + 1 }}
 			>
-				<Container maxWidth="lg">
+				<Container maxWidth={false}>
 					<Toolbar disableGutters sx={{ gap: 2 }}>
+						{showDrawer && (
+							<IconButton
+								color="inherit"
+								aria-label="open drawer"
+								edge="start"
+								onClick={handleDrawerToggle}
+								sx={{ mr: 2, display: { sm: 'none' } }}
+							>
+								<MenuIcon />
+							</IconButton>
+						)}
 						<Button component={Link} to="/">
 							{t('layout.home')}
 						</Button>
@@ -40,7 +59,6 @@ const Layout: FC = ({ children }) => {
 			</AppBar>
 
 			<Box
-				maxWidth="lg"
 				component="main"
 				sx={{
 					px: '0',
