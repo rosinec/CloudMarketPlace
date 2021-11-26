@@ -1,12 +1,11 @@
-import { CircularProgress, Grid, Box } from '@mui/material';
+import { Grid, Box } from '@mui/material';
 import { useState } from 'react';
 
 import { useTranslation } from '../hooks/useTranslation';
 import AppFilterDrawer from '../components/AppFilterDrawer';
 import usePageTitle from '../hooks/usePageTitle';
-import { useApp, useAppsLoading } from '../hooks/useApps';
+import { useApp } from '../hooks/useApps';
 import AppCard from '../components/AppCard';
-import { useUsersLoading } from '../hooks/useLoggedInUser';
 
 const Home = () => {
 	const t = useTranslation();
@@ -15,8 +14,6 @@ const Home = () => {
 	const [tags, setTags] = useState<string[]>([]);
 
 	const [apps] = useApp();
-	const loading = useAppsLoading();
-	const userLoading = useUsersLoading();
 
 	const appApplyToFilter = (appTags: string[]) => {
 		if (tags.length === 0) {
@@ -35,19 +32,15 @@ const Home = () => {
 					padding: '30px'
 				}}
 			>
-				{loading || userLoading ? (
-					<CircularProgress />
-				) : (
-					<Grid container spacing={2}>
-						{apps
-							.filter(app => appApplyToFilter(app.tags))
-							.map((app, index) => (
-								<Grid key={index} item xs={12} sm={6} md={4}>
-									<AppCard {...app} />
-								</Grid>
-							))}
-					</Grid>
-				)}
+				<Grid container spacing={2}>
+					{apps
+						.filter(app => appApplyToFilter(app.tags))
+						.map((app, index) => (
+							<Grid key={index} item xs={12} sm={6} md={4}>
+								<AppCard {...app} />
+							</Grid>
+						))}
+				</Grid>
 			</Box>
 		</>
 	);

@@ -5,13 +5,16 @@ import {
 	Toolbar,
 	Button,
 	Box,
+	CircularProgress,
 	IconButton
 } from '@mui/material';
 import { Link, useLocation } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 
 import { useTranslation } from '../hooks/useTranslation';
+import { useUsersLoading } from '../hooks/useLoggedInUser';
 import { useFilterDrawer } from '../hooks/useFilterDrawer';
+import { useAppsLoading } from '../hooks/useApps';
 
 import LanguageSwitch from './switches/LanguageSwitch';
 import ThemeSwitch from './switches/ThemeSwitch';
@@ -19,6 +22,8 @@ import LoginSwitch from './switches/LoginSwitch';
 
 const Layout: FC = ({ children }) => {
 	const t = useTranslation();
+	const userLoading = useUsersLoading();
+	const appsLoading = useAppsLoading();
 
 	const [, handleDrawerToggle] = useFilterDrawer();
 	const location = useLocation();
@@ -63,7 +68,11 @@ const Layout: FC = ({ children }) => {
 					justifyContent: 'center'
 				}}
 			>
-				{children}
+				{userLoading || appsLoading ? (
+					<CircularProgress style={{ margin: '20px' }} />
+				) : (
+					children
+				)}
 			</Box>
 		</>
 	);
