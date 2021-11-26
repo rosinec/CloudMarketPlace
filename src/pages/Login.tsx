@@ -1,3 +1,4 @@
+import { setDoc } from '@firebase/firestore';
 import { Button, Paper, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { FormEvent, useState } from 'react';
@@ -6,7 +7,7 @@ import { useHistory } from 'react-router';
 import useField from '../hooks/useField';
 import usePageTitle from '../hooks/usePageTitle';
 import { useTranslation } from '../hooks/useTranslation';
-import { signIn, signUp } from '../utils/firebase';
+import { signIn, signUp, usersDocument } from '../utils/firebase';
 
 const Login = () => {
 	const t = useTranslation();
@@ -31,6 +32,11 @@ const Login = () => {
 						? await signUp(email, password)
 						: await signIn(email, password);
 					push('/');
+					if (isSignUp) {
+						await setDoc(usersDocument(email), {
+							isAdmin: false
+						});
+					}
 				} catch (err) {
 					setSubmitError(
 						(err as { message?: string })?.message ?? t('error.unknown')

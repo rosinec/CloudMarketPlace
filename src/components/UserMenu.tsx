@@ -3,6 +3,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { IconButton, ListItemIcon, Tooltip } from '@mui/material';
 import { AccountCircle, Logout } from '@mui/icons-material';
+import { useHistory } from 'react-router-dom';
 
 import { signOut } from '../utils/firebase';
 import { useLoggedInUser } from '../hooks/useLoggedInUser';
@@ -11,6 +12,7 @@ import { useTranslation } from '../hooks/useTranslation';
 const UserMenu = () => {
 	const user = useLoggedInUser();
 	const t = useTranslation();
+	const { push } = useHistory();
 
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 	const open = Boolean(anchorEl);
@@ -21,9 +23,14 @@ const UserMenu = () => {
 		setAnchorEl(null);
 	};
 
+	const handleSignOut = () => {
+		signOut();
+		push('/login');
+	};
+
 	return (
 		<>
-			<Tooltip title={user?.email ?? ''}>
+			<Tooltip title={user?.isAdmin === true ? 'Admin' : 'User'}>
 				<IconButton
 					size="large"
 					aria-label="account of current user"
@@ -69,7 +76,7 @@ const UserMenu = () => {
 				transformOrigin={{ horizontal: 'right', vertical: 'top' }}
 				anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
 			>
-				<MenuItem onClick={signOut}>
+				<MenuItem onClick={() => handleSignOut()}>
 					<ListItemIcon>
 						<Logout fontSize="small" />
 					</ListItemIcon>

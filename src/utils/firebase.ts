@@ -10,6 +10,8 @@ import {
 import {
 	collection,
 	CollectionReference,
+	doc,
+	DocumentReference,
 	getFirestore
 } from 'firebase/firestore';
 
@@ -45,12 +47,17 @@ export const onAuthChanged = (callback: (u: User | null) => void) =>
 const db = getFirestore();
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-export type Admin = {};
+export type UserData = {
+	isAdmin: boolean;
+};
 
-export const adminsCollection = collection(
+export const usersCollection = collection(
 	db,
-	'admins'
-) as CollectionReference<Admin>;
+	'users'
+) as CollectionReference<UserData>;
+
+export const usersDocument = (id: string) =>
+	doc(db, 'users', id) as DocumentReference<UserData>;
 
 export type App = {
 	name: string;
