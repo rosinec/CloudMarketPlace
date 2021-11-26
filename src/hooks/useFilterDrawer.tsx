@@ -5,7 +5,7 @@ export const FilterDrawerContext = createContext<[boolean, () => void]>(
 );
 
 export const FilterDrawerProvider: FC = ({ children }) => {
-	const [mobileOpen, setMobileOpen] = useState(true);
+	const [mobileOpen, setMobileOpen] = useState(false);
 
 	const handleDrawerToggle = () => {
 		setMobileOpen(!mobileOpen);
