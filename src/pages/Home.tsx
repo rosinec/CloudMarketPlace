@@ -24,9 +24,10 @@ const Home = () => {
 	};
 
 	return (
-		<Box display="flex" flexDirection="row" justify-content="flex-start">
+		<>
 			<AppFilterDrawer tags={tags} setTags={setTags} />
 			<Box
+				maxWidth="lg"
 				flexGrow={1}
 				sx={{
 					padding: '30px'
@@ -39,20 +40,14 @@ const Home = () => {
 						{apps
 							.filter(app => appApplyToFilter(app.tags))
 							.map((app, index) => (
-								<Grid
-									key={index}
-									item
-									xs={12}
-									sm={6}
-									md={apps.length % 3 === 2 ? 6 : 4}
-								>
+								<Grid key={index} item xs={12} sm={6} md={4}>
 									<AppCard {...app} />
 								</Grid>
 							))}
 					</Grid>
 				)}
 			</Box>
-		</Box>
+		</>
 	);
 };
 
