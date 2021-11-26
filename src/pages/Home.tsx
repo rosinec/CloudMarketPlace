@@ -6,6 +6,7 @@ import AppFilterDrawer from '../components/AppFilterDrawer';
 import usePageTitle from '../hooks/usePageTitle';
 import { useApp, useAppsLoading } from '../hooks/useApps';
 import AppCard from '../components/AppCard';
+import { useUsersLoading } from '../hooks/useLoggedInUser';
 
 const Home = () => {
 	const t = useTranslation();
@@ -15,6 +16,7 @@ const Home = () => {
 
 	const [apps] = useApp();
 	const loading = useAppsLoading();
+	const userLoading = useUsersLoading();
 
 	const appApplyToFilter = (appTags: string[]) => {
 		if (tags.length === 0) {
@@ -33,7 +35,7 @@ const Home = () => {
 					padding: '30px'
 				}}
 			>
-				{loading ? (
+				{loading || userLoading ? (
 					<CircularProgress />
 				) : (
 					<Grid container spacing={2}>
