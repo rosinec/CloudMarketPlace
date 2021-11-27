@@ -13,11 +13,10 @@ type Props = {
 
 export const AuthenticatedRoute: FC<Props> = ({ C, ...rest }) => {
 	const user = useLoggedInUser();
-	const isLogged = user !== null;
 	return (
 		<Route
 			{...rest}
-			render={() => (isLogged ? <C /> : <Redirect to="/login" />)}
+			render={() => (!user ? <C /> : <Redirect to="/login" />)}
 		/>
 	);
 };
@@ -26,11 +25,11 @@ const Routes = () => {
 	const user = useLoggedInUser();
 	return (
 		<Switch>
-			{!user ? (
-				<Route path="/login" exact component={Login} />
-			) : (
-				<Redirect to="/" />
-			)}
+			<Route
+				path="/login"
+				exact
+				render={() => (!user ? <Login /> : <Redirect to="/" />)}
+			/>
 			<Route component={All} exact path="/" />
 			<AuthenticatedRoute C={AppDetail} exact path="/apps/:name" />
 			<Route component={NotFound} />
