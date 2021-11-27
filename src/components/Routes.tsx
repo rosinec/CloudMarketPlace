@@ -20,8 +20,7 @@ type Props = {
 export const AuthenticatedRoute: FC<Props> = ({ C, ...rest }) => {
 	const user = useLoggedInUser();
 	const isLogged = user !== null;
-	console.log(!user);
-	console.log(user !== null);
+
 	return (
 		<Route
 			{...rest}
