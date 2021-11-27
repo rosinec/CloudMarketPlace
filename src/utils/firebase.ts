@@ -12,7 +12,8 @@ import {
 	CollectionReference,
 	doc,
 	DocumentReference,
-	getFirestore
+	getFirestore,
+	Timestamp
 } from 'firebase/firestore';
 
 // Initialize Firebase
@@ -46,19 +47,6 @@ export const onAuthChanged = (callback: (u: User | null) => void) =>
 // Firestore
 const db = getFirestore();
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-export type UserData = {
-	isAdmin: boolean;
-};
-
-export const usersCollection = collection(
-	db,
-	'users'
-) as CollectionReference<UserData>;
-
-export const usersDocument = (id: string) =>
-	doc(db, 'users', id) as DocumentReference<UserData>;
-
 export type App = {
 	name: string;
 	connection_info: string;
@@ -72,3 +60,21 @@ export const appsCollection = collection(
 	db,
 	'apps'
 ) as CollectionReference<App>;
+
+export const appsDocument = (id: string) =>
+	doc(db, 'apps', id) as DocumentReference<App>;
+
+export type InstalledApp = App & { installedAt: Timestamp };
+
+export type UserData = {
+	isAdmin: boolean;
+	installedApps: InstalledApp[];
+};
+
+export const usersCollection = collection(
+	db,
+	'users'
+) as CollectionReference<UserData>;
+
+export const usersDocument = (id: string) =>
+	doc(db, 'users', id) as DocumentReference<UserData>;

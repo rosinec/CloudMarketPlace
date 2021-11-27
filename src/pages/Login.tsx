@@ -34,7 +34,8 @@ const Login = () => {
 					push('/');
 					if (isSignUp) {
 						await setDoc(usersDocument(email), {
-							isAdmin: false
+							isAdmin: false,
+							installedApps: []
 						});
 					}
 				} catch (err) {

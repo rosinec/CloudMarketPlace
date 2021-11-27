@@ -1,11 +1,12 @@
 {
-  "name": "cloud-market-place",
+	"name": "cloud-market-place",
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
 		"@emotion/react": "^11.4.1",
 		"@emotion/styled": "^11.3.0",
 		"@mui/icons-material": "^5.0.1",
+		"@mui/lab": "^5.0.0-alpha.57",
 		"@mui/material": "^5.0.2",
 		"firebase": "^9.2.0",
 		"react": "^17.0.2",
@@ -58,4 +59,3 @@
 		]
 	}
 }
-

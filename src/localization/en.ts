@@ -16,5 +16,7 @@ export default {
 	'language.en': 'English',
 	'app.web': 'Website',
 	'app.docs': 'Documentation',
-	'app.more': 'Show more..'
+	'app.more': 'Show more..',
+	'app.install': 'Install',
+	'app.uninstall': 'Uninstall'
 };

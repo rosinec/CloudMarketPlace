@@ -16,5 +16,7 @@ export default {
 	'language.en': 'Angličtina',
 	'app.web': 'Webová stránka',
 	'app.docs': 'Dokumentace',
-	'app.more': 'Ukázat více..'
+	'app.more': 'Ukázat více..',
+	'app.install': 'Instalovat',
+	'app.uninstall': 'Odinstalovat'
 };
