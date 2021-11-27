@@ -23,7 +23,7 @@ const useInstall = (name: string) => {
 	const handleInstall = async () => {
 		setLoading(true);
 		user?.installedApps.push({
-			...app,
+			name: app.name,
 			installedAt: Timestamp.now()
 		});
 		await fetch(user?.installedApps ?? []);

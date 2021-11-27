@@ -64,7 +64,7 @@ export const appsCollection = collection(
 export const appsDocument = (id: string) =>
 	doc(db, 'apps', id) as DocumentReference<App>;
 
-export type InstalledApp = App & { installedAt: Timestamp };
+export type InstalledApp = { name: string; installedAt: Timestamp };
 
 export type UserData = {
 	isAdmin: boolean;
