@@ -9,7 +9,7 @@ const AppDetail: FC = () => {
 	const { description } = useAppByName(name);
 
 	return (
-		<Box maxWidth="lg">
+		<Box>
 			<h1>{name}</h1>
 			<p>{description}</p>
 		</Box>

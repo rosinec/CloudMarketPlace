@@ -1,5 +1,4 @@
 import { Box, Chip, Button, Toolbar, Drawer } from '@mui/material';
-import * as React from 'react';
 import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -9,6 +8,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
 import Divider from '@mui/material/Divider';
 import { Dispatch, SetStateAction } from 'react';
+import { Link } from 'react-router-dom';
 
 import { useTags } from '../hooks/useApps';
 import { useFilterDrawer } from '../hooks/useFilterDrawer';
@@ -17,6 +17,7 @@ import {
 	ITEM_HEIGHT,
 	ITEM_PADDING_TOP
 } from '../utils/constants';
+import { useTranslation } from '../hooks/useTranslation';
 
 const MenuProps = {
 	PaperProps: {
@@ -33,6 +34,7 @@ type Props = {
 };
 
 const AppFilterDrawer = ({ tags, setTags }: Props) => {
+	const t = useTranslation();
 	const allTags = useTags();
 	const [mobileOpen, handleDrawerToggle] = useFilterDrawer();
 
@@ -53,7 +55,9 @@ const AppFilterDrawer = ({ tags, setTags }: Props) => {
 	const drawer = (
 		<>
 			<Toolbar />
-			<Button style={{ justifyContent: 'flex-start' }}>All</Button>
+			<Button style={{ justifyContent: 'flex-start' }} component={Link} to="/">
+				{t('layout.all')}
+			</Button>
 			<Divider />
 			<Button style={{ justifyContent: 'flex-start' }}>Trending</Button>
 			<Divider />

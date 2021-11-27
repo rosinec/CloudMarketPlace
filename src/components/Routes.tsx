@@ -3,7 +3,7 @@ import { Switch, Route, Redirect, RouteProps } from 'react-router-dom';
 
 import { useLoggedInUser } from '../hooks/useLoggedInUser';
 import AppDetail from '../pages/AppDetail';
-import Home from '../pages/Home';
+import All from '../pages/All';
 import Login from '../pages/Login';
 import NotFound from '../pages/NotFound';
 
@@ -27,7 +27,7 @@ const Routes = () => {
 	return (
 		<Switch>
 			{!user && <Route path="/login" exact component={Login} />}
-			<Route component={Home} exact path="/" />
+			<Route component={All} exact path="/" />
 			<AuthenticatedRoute C={AppDetail} exact path="/apps/:name" />
 			<Route component={NotFound} />
 		</Switch>

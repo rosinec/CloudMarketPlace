@@ -6,7 +6,7 @@ export default {
 	'login.signUp': 'Sign up',
 	'login.email': 'Email',
 	'login.password': 'Password',
-	'layout.home': 'Home',
+	'layout.all': 'All',
 	'layout.login': 'Login',
 	'layout.logout': 'Logout',
 	'layout.notFound': 'Not Found',

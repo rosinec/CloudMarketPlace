@@ -6,7 +6,7 @@ export default {
 	'login.signUp': 'Zaregistrovat se',
 	'login.email': 'Email',
 	'login.password': 'Heslo',
-	'layout.home': 'Domů',
+	'layout.all': 'Vše',
 	'layout.login': 'Přihlásit se',
 	'layout.logout': 'Odhlásit se',
 	'layout.notFound': 'Nenalezeno',
