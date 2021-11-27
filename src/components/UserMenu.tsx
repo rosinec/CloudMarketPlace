@@ -23,8 +23,8 @@ const UserMenu = () => {
 		setAnchorEl(null);
 	};
 
-	const handleSignOut = () => {
-		signOut();
+	const handleSignOut = async () => {
+		await signOut();
 		push('/login');
 	};
 
