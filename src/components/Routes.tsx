@@ -26,7 +26,11 @@ const Routes = () => {
 	const user = useLoggedInUser();
 	return (
 		<Switch>
-			{!user && <Route path="/login" exact component={Login} />}
+			{!user ? (
+				<Route path="/login" exact component={Login} />
+			) : (
+				<Redirect to="/" />
+			)}
 			<Route component={All} exact path="/" />
 			<AuthenticatedRoute C={AppDetail} exact path="/apps/:name" />
 			<Route component={NotFound} />
