@@ -18,9 +18,10 @@ export const UserProvider: FC = ({ children }) => {
 	// Setup onAuthChanged once when component is mounted
 	useEffect(() => {
 		onAuthChanged(u => {
-			setUser(u);
-
 			setLoading(true);
+			setUser(u);
+			console.log(u);
+
 			const unsubscribe = onSnapshot(usersCollection, snapshot => {
 				setUserData(
 					snapshot.docs.find(data => data.id === user?.email)?.data()
@@ -32,6 +33,8 @@ export const UserProvider: FC = ({ children }) => {
 			};
 		});
 	}, [user]);
+
+	console.log(user);
 
 	return (
 		<UserContext.Provider

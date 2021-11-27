@@ -1,7 +1,13 @@
-import { FC } from 'react';
-import { Switch, Route, Redirect, RouteProps } from 'react-router-dom';
+import { FC, useEffect } from 'react';
+import {
+	Switch,
+	Route,
+	Redirect,
+	RouteProps,
+	useHistory
+} from 'react-router-dom';
 
-import { useLoggedInUser } from '../hooks/useLoggedInUser';
+import { useLoggedInUser, useUsersLoading } from '../hooks/useLoggedInUser';
 import AppDetail from '../pages/AppDetail';
 import All from '../pages/All';
 import Login from '../pages/Login';
@@ -13,23 +19,28 @@ type Props = {
 
 export const AuthenticatedRoute: FC<Props> = ({ C, ...rest }) => {
 	const user = useLoggedInUser();
+	const isLogged = user !== null;
+	console.log(!user);
+	console.log(user !== null);
 	return (
 		<Route
 			{...rest}
-			render={() => (!user ? <C /> : <Redirect to="/login" />)}
+			render={() => (isLogged ? <C /> : <Redirect to="/login" />)}
 		/>
 	);
 };
 
 const Routes = () => {
+	const userLoading = useUsersLoading();
 	const user = useLoggedInUser();
+	const { push } = useHistory();
+	useEffect(() => {
+		push('/');
+	}, [userLoading]);
+
 	return (
 		<Switch>
-			<Route
-				path="/login"
-				exact
-				render={() => (!user ? <Login /> : <Redirect to="/" />)}
-			/>
+			{!user && <Route path="/login" exact component={Login} />}
 			<Route component={All} exact path="/" />
 			<AuthenticatedRoute C={AppDetail} exact path="/apps/:name" />
 			<Route component={NotFound} />
