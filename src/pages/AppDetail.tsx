@@ -5,11 +5,14 @@ import { useParams } from 'react-router-dom';
 import InstallButton from '../components/InstallButton';
 import { useAppByName } from '../hooks/useApps';
 import { useLoggedInUser } from '../hooks/useLoggedInUser';
+import usePageTitle from '../hooks/usePageTitle';
 
 const AppDetail: FC = () => {
 	const user = useLoggedInUser();
 
 	const { name } = useParams<{ name: string }>();
+
+	usePageTitle(name);
 	const { description } = useAppByName(name);
 	const installedApp = useMemo(() => {
 		if (user?.installedApps === undefined) return null;
