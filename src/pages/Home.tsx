@@ -2,7 +2,7 @@ import { CircularProgress, Grid, Box } from '@mui/material';
 import { useState } from 'react';
 
 import { useTranslation } from '../hooks/useTranslation';
-import AppFilterDrawer from '../components/AppFilterDrawer';
+import AppDrawer from '../components/AppDrawer';
 import usePageTitle from '../hooks/usePageTitle';
 import { useAppsLoading } from '../hooks/useApps';
 import AppCard from '../components/AppCard';
@@ -18,7 +18,7 @@ const Home = () => {
 
 	return (
 		<Box display="flex" flexDirection="row" justify-content="flex-start">
-			<AppFilterDrawer setApps={setApps} />
+			<AppDrawer setApps={setApps} />
 			<Box
 				flexGrow={1}
 				sx={{
