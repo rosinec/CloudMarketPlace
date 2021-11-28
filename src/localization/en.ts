@@ -16,5 +16,11 @@ export default {
 	'language.en': 'English',
 	'app.web': 'Website',
 	'app.docs': 'Documentation',
-	'app.more': 'Show more..'
+	'app.more': 'Show more..',
+	'drawer.all': 'All',
+	'drawer.trending': 'Trending',
+	'drawer.new': 'New',
+	'drawer.tags': 'Category',
+	'drawer.tags.clear': 'Clear',
+	'drawer.search': 'Search'
 };

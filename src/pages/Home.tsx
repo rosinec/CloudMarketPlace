@@ -4,28 +4,21 @@ import { useState } from 'react';
 import { useTranslation } from '../hooks/useTranslation';
 import AppFilterDrawer from '../components/AppFilterDrawer';
 import usePageTitle from '../hooks/usePageTitle';
-import { useApp, useAppsLoading } from '../hooks/useApps';
+import { useAppsLoading } from '../hooks/useApps';
 import AppCard from '../components/AppCard';
+import { App } from '../utils/firebase';
 
 const Home = () => {
 	const t = useTranslation();
 	usePageTitle(t('layout.home'));
 
-	const [tags, setTags] = useState<string[]>([]);
+	const [apps, setApps] = useState<App[]>([]);
 
-	const [apps] = useApp();
 	const loading = useAppsLoading();
-
-	const appApplyToFilter = (appTags: string[]) => {
-		if (tags.length === 0) {
-			return true;
-		}
-		return tags.some(tag => appTags.indexOf(tag) > -1);
-	};
 
 	return (
 		<Box display="flex" flexDirection="row" justify-content="flex-start">
-			<AppFilterDrawer tags={tags} setTags={setTags} />
+			<AppFilterDrawer setApps={setApps} />
 			<Box
 				flexGrow={1}
 				sx={{
@@ -36,19 +29,17 @@ const Home = () => {
 					<CircularProgress />
 				) : (
 					<Grid container spacing={2}>
-						{apps
-							.filter(app => appApplyToFilter(app.tags))
-							.map((app, index) => (
-								<Grid
-									key={index}
-									item
-									xs={12}
-									sm={6}
-									md={apps.length % 3 === 2 ? 6 : 4}
-								>
-									<AppCard {...app} />
-								</Grid>
-							))}
+						{apps.map((app, index) => (
+							<Grid
+								key={index}
+								item
+								xs={12}
+								sm={6}
+								md={apps.length % 3 === 2 ? 6 : 4}
+							>
+								<AppCard {...app} />
+							</Grid>
+						))}
 					</Grid>
 				)}
 			</Box>

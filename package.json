@@ -1,5 +1,5 @@
 {
-  "name": "cloud-market-place",
+	"name": "cloud-market-place",
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
@@ -58,4 +58,3 @@
 		]
 	}
 }
-
