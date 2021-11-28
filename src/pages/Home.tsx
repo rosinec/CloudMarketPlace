@@ -18,7 +18,7 @@ const Home = () => {
 
 	return (
 		<Box display="flex" flexDirection="row" justify-content="flex-start">
-			<AppDrawer setApps={setApps} />
+			<AppDrawer apps={apps} setApps={setApps} />
 			<Box
 				flexGrow={1}
 				sx={{

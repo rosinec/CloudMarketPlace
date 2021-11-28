@@ -10,7 +10,8 @@ import {
 import {
 	collection,
 	CollectionReference,
-	getFirestore
+	getFirestore,
+	Timestamp
 } from 'firebase/firestore';
 
 // Initialize Firebase
@@ -59,6 +60,7 @@ export type App = {
 	documentation: string;
 	tags: string[];
 	website: string;
+	added: Timestamp;
 };
 
 export const appsCollection = collection(

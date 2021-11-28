@@ -12,17 +12,6 @@ import { Dispatch, SetStateAction } from 'react';
 import { useTags } from '../hooks/useApps';
 import { useTranslation } from '../hooks/useTranslation';
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-	PaperProps: {
-		style: {
-			maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-			width: 200
-		}
-	}
-};
-
 type Props = {
 	tags: string[];
 	setTags: Dispatch<SetStateAction<string[]>>;
@@ -46,10 +35,6 @@ const TagFilter = ({ tags, setTags }: Props) => {
 		setTags([]);
 	};
 
-	const handleDelete = () => {
-		setTags([]);
-	};
-
 	return (
 		<FormControl sx={{ mt: '30px', width: 180 }}>
 			<Button
@@ -65,7 +50,9 @@ const TagFilter = ({ tags, setTags }: Props) => {
 			>
 				{t('drawer.tags.clear')}
 			</Button>
-			<InputLabel id="tags-checkbox-label">{t('drawer.tags')}</InputLabel>
+			<InputLabel id="tags-checkbox-label" sx={{ fontSize: '14px' }}>
+				{t('drawer.tags').toUpperCase()}
+			</InputLabel>
 
 			<Select
 				labelId="tags-checkbox-label"
@@ -86,11 +73,21 @@ const TagFilter = ({ tags, setTags }: Props) => {
 						}}
 					>
 						{selected.map(value => (
-							<Chip key={value} label={value} onDelete={handleDelete} />
+							<Chip key={value} label={value} />
 						))}
 					</Box>
 				)}
-				MenuProps={MenuProps}
+				// MenuProps={MenuProps}
+				MenuProps={{
+					anchorOrigin: {
+						vertical: 'center',
+						horizontal: 'center'
+					},
+					transformOrigin: {
+						vertical: 'center',
+						horizontal: 'center'
+					}
+				}}
 			>
 				{Array.from(allTags.values()).map(name => (
 					<MenuItem key={name} value={name}>

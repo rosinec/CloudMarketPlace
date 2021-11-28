@@ -9,6 +9,7 @@ const useField = (id: string, required?: boolean) => {
 	return [
 		// Current value for convenient access
 		value,
+		setValue,
 		// Props for the TextField
 		{
 			id,
