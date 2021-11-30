@@ -1,79 +1,48 @@
 import { Box, Button, Toolbar, Drawer, TextField } from '@mui/material';
 import Divider from '@mui/material/Divider';
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useFilterDrawer } from '../hooks/useFilterDrawer';
 import { DRAWER_WIDTH } from '../utils/constants';
 import { useTranslation } from '../hooks/useTranslation';
-import useField from '../hooks/useField';
-import { useApp } from '../hooks/useApps';
+import useFilter from '../hooks/useFilter';
 
 import TagFilter from './TagFilter';
 
-const AppFilterDrawer = () => {
+const AppDrawer = () => {
 	const t = useTranslation();
-	const [allApps] = useApp();
 	const [mobileOpen, handleDrawerToggle] = useFilterDrawer();
-	const [, , apps, setApps] = useFilterDrawer();
 
-	const [tags, setTags] = useState<string[]>([]);
-	const [search, setSearch, searchProps] = useField('search', false);
-
-	useEffect(() => {
-		const filteredAppsByTags = allApps.filter(app =>
-			appApplyToFilter(app.tags)
-		);
-		const filteredApps = filteredAppsByTags.filter(app =>
-			app.name.toLowerCase().includes(search.toLowerCase())
-		);
-		setApps(filteredApps);
-	}, [search, tags, allApps]);
-
-	const appApplyToFilter = (appTags: string[]) => {
-		if (tags.length === 0) {
-			return true;
-		}
-		return tags.some(tag => appTags.indexOf(tag) > -1);
-	};
-
-	const resetFilters = () => {
-		setTags([]);
-		setSearch('');
-	};
-
-	const applyNew = () => {
-		apps.sort((first, second) => second.added.seconds - first.added.seconds);
-		// TODO: this slice is not neccesarry...
-		// But it does not propagate apps without slicing (or other change).
-		// Also dont know why, but by default, the apps are fetched from db already sorted
-		setApps(apps.slice(0));
-	};
+	const [tags, setTags, searchProps, applyNew, resetFilters] = useFilter();
 
 	const drawer = (
 		<>
 			<Toolbar />
-			<Button style={{ justifyContent: 'flex-start' }} component={Link} to="/">
+			<Button
+				sx={{ ml: '10px', justifyContent: 'flex-start' }}
+				component={Link}
+				to="/"
+			>
 				{t('layout.all')}
 			</Button>
 			<Divider />
 			<Button
-				style={{ justifyContent: 'flex-start' }}
+				sx={{ ml: '10px', justifyContent: 'flex-start' }}
 				component={Link}
 				to="/myapps"
 			>
 				{t('layout.my-apps')}
 			</Button>
 			<Divider />
-			<Button onClick={resetFilters} style={{ justifyContent: 'flex-start' }}>
-				{t('drawer.reset')}
-			</Button>
 			<Divider />
-			<Button style={{ justifyContent: 'flex-start' }}>
+			<Button sx={{ ml: '10px', justifyContent: 'flex-start' }}>
 				{t('drawer.trending')}
 			</Button>
 			<Divider />
-			<Button onClick={applyNew} style={{ justifyContent: 'flex-start' }}>
+			<Button
+				onClick={applyNew}
+				sx={{ ml: '10px', justifyContent: 'flex-start' }}
+			>
 				{t('drawer.new')}
 			</Button>
 			<Divider />
@@ -88,6 +57,12 @@ const AppFilterDrawer = () => {
 			/>
 			<Divider />
 			<TagFilter tags={tags} setTags={setTags} />
+			<Button
+				onClick={resetFilters}
+				sx={{ ml: '10px', justifyContent: 'flex-start' }}
+			>
+				{t('drawer.reset')}
+			</Button>
 		</>
 	);
 
@@ -129,4 +104,4 @@ const AppFilterDrawer = () => {
 	);
 };
 
-export default AppFilterDrawer;
+export default AppDrawer;

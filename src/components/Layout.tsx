@@ -17,7 +17,7 @@ import { DRAWER_WIDTH } from '../utils/constants';
 import LanguageSwitch from './switches/LanguageSwitch';
 import ThemeSwitch from './switches/ThemeSwitch';
 import LoginSwitch from './switches/LoginSwitch';
-import AppFilterDrawer from './AppFilterDrawer';
+import AppDrawer from './AppDrawer';
 
 const Layout: FC = ({ children }) => {
 	const userLoading = useUsersLoading();
@@ -52,7 +52,7 @@ const Layout: FC = ({ children }) => {
 			</AppBar>
 
 			<Box sx={{ display: 'flex', justifyContent: 'center' }}>
-				<AppFilterDrawer />
+				<AppDrawer />
 				{userLoading || appsLoading ? (
 					<CircularProgress
 						style={{

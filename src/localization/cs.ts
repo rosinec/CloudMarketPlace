@@ -20,7 +20,7 @@ export default {
 	'app.more': 'Ukázat více..',
 	'app.install': 'Instalovat',
 	'app.uninstall': 'Odinstalovat',
-	'drawer.reset': 'Reset',
+	'drawer.reset': 'Resetovat vše',
 	'drawer.trending': 'Populární',
 	'drawer.new': 'Nové',
 	'drawer.tags': 'Kategorie',

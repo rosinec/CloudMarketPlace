@@ -20,7 +20,7 @@ export default {
 	'app.more': 'Show more..',
 	'app.install': 'Install',
 	'app.uninstall': 'Uninstall',
-	'drawer.reset': 'Reset',
+	'drawer.reset': 'Reset all',
 	'drawer.trending': 'Trending',
 	'drawer.new': 'New',
 	'drawer.tags': 'Category',
