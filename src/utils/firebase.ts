@@ -54,6 +54,7 @@ export type App = {
 	documentation: string;
 	tags: string[];
 	website: string;
+	added: Timestamp;
 };
 
 export const appsCollection = collection(

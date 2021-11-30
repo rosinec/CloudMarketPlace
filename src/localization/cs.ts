@@ -18,5 +18,11 @@ export default {
 	'app.docs': 'Dokumentace',
 	'app.more': 'Ukázat více..',
 	'app.install': 'Instalovat',
-	'app.uninstall': 'Odinstalovat'
+	'app.uninstall': 'Odinstalovat',
+	'drawer.reset': 'Reset',
+	'drawer.trending': 'Populární',
+	'drawer.new': 'Nové',
+	'drawer.tags': 'Kategorie',
+	'drawer.tags.clear': 'Vymazat',
+	'drawer.search': 'Hledat'
 };

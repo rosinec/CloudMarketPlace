@@ -18,5 +18,11 @@ export default {
 	'app.docs': 'Documentation',
 	'app.more': 'Show more..',
 	'app.install': 'Install',
-	'app.uninstall': 'Uninstall'
+	'app.uninstall': 'Uninstall',
+	'drawer.reset': 'Reset',
+	'drawer.trending': 'Trending',
+	'drawer.new': 'New',
+	'drawer.tags': 'Category',
+	'drawer.tags.clear': 'Clear',
+	'drawer.search': 'Search'
 };

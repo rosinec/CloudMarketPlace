@@ -25,8 +25,6 @@ const Layout: FC = ({ children }) => {
 
 	const [, handleDrawerToggle] = useFilterDrawer();
 
-	const [, , tags, setTags] = useFilterDrawer();
-
 	return (
 		<>
 			<AppBar
@@ -54,7 +52,7 @@ const Layout: FC = ({ children }) => {
 			</AppBar>
 
 			<Box sx={{ display: 'flex', justifyContent: 'center' }}>
-				<AppFilterDrawer tags={tags} setTags={setTags} />
+				<AppFilterDrawer />
 				{userLoading || appsLoading ? (
 					<CircularProgress
 						style={{

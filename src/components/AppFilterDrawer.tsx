@@ -1,55 +1,53 @@
-import { Box, Chip, Button, Toolbar, Drawer } from '@mui/material';
-import Input from '@mui/material/Input';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import ListItemText from '@mui/material/ListItemText';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import Checkbox from '@mui/material/Checkbox';
+import { Box, Button, Toolbar, Drawer, TextField } from '@mui/material';
 import Divider from '@mui/material/Divider';
-import { Dispatch, SetStateAction } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { useTags } from '../hooks/useApps';
 import { useFilterDrawer } from '../hooks/useFilterDrawer';
-import {
-	DRAWER_WIDTH,
-	ITEM_HEIGHT,
-	ITEM_PADDING_TOP
-} from '../utils/constants';
+import { DRAWER_WIDTH } from '../utils/constants';
 import { useTranslation } from '../hooks/useTranslation';
+import useField from '../hooks/useField';
+import { useApp } from '../hooks/useApps';
 
-const MenuProps = {
-	PaperProps: {
-		style: {
-			maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-			width: 200
-		}
-	}
-};
+import TagFilter from './TagFilter';
 
-type Props = {
-	tags: string[];
-	setTags: Dispatch<SetStateAction<string[]>>;
-};
-
-const AppFilterDrawer = ({ tags, setTags }: Props) => {
+const AppFilterDrawer = () => {
 	const t = useTranslation();
-	const allTags = useTags();
+	const [allApps] = useApp();
 	const [mobileOpen, handleDrawerToggle] = useFilterDrawer();
+	const [, , apps, setApps] = useFilterDrawer();
 
-	const handleChange = (event: SelectChangeEvent<string[]>) => {
-		const {
-			target: { value }
-		} = event;
-		setTags(
-			// On autofill we get a the stringified value.
-			typeof value === 'string' ? value.split(',') : value
+	const [tags, setTags] = useState<string[]>([]);
+	const [search, setSearch, searchProps] = useField('search', false);
+
+	useEffect(() => {
+		const filteredAppsByTags = allApps.filter(app =>
+			appApplyToFilter(app.tags)
 		);
+		const filteredApps = filteredAppsByTags.filter(app =>
+			app.name.toLowerCase().includes(search.toLowerCase())
+		);
+		setApps(filteredApps);
+	}, [search, tags, allApps]);
+
+	const appApplyToFilter = (appTags: string[]) => {
+		if (tags.length === 0) {
+			return true;
+		}
+		return tags.some(tag => appTags.indexOf(tag) > -1);
 	};
 
-	const handleClear = () => {
+	const resetFilters = () => {
 		setTags([]);
+		setSearch('');
+	};
+
+	const applyNew = () => {
+		apps.sort((first, second) => second.added.seconds - first.added.seconds);
+		// TODO: this slice is not neccesarry...
+		// But it does not propagate apps without slicing (or other change).
+		// Also dont know why, but by default, the apps are fetched from db already sorted
+		setApps(apps.slice(0));
 	};
 
 	const drawer = (
@@ -59,59 +57,29 @@ const AppFilterDrawer = ({ tags, setTags }: Props) => {
 				{t('layout.all')}
 			</Button>
 			<Divider />
-			<Button style={{ justifyContent: 'flex-start' }}>Trending</Button>
+			<Button onClick={resetFilters} style={{ justifyContent: 'flex-start' }}>
+				{t('drawer.reset')}
+			</Button>
 			<Divider />
-			<Button style={{ justifyContent: 'flex-start' }}>New</Button>
+			<Button style={{ justifyContent: 'flex-start' }}>
+				{t('drawer.trending')}
+			</Button>
 			<Divider />
-			<FormControl sx={{ mt: '30px', width: 180 }}>
-				<Button
-					sx={{
-						width: '20px',
-						position: 'absolute',
-						pr: '0px',
-						right: '0',
-						mt: '-15px',
-						fontSize: '10px'
-					}}
-					onClick={handleClear}
-				>
-					Clear
-				</Button>
-				<InputLabel id="category-checkbox-label">CATEGORY</InputLabel>
-
-				<Select
-					labelId="category-checkbox-label"
-					id="category-checkbox"
-					multiple
-					disableUnderline
-					value={tags}
-					onChange={handleChange}
-					input={<Input sx={{ p: '10px' }} />}
-					renderValue={selected => (
-						<Box
-							sx={{
-								paddingRight: '10px',
-								paddingBottom: '0px',
-								display: 'flex',
-								flexWrap: 'wrap',
-								gap: 0.5
-							}}
-						>
-							{selected.map(value => (
-								<Chip key={value} label={value} />
-							))}
-						</Box>
-					)}
-					MenuProps={MenuProps}
-				>
-					{Array.from(allTags.values()).map(name => (
-						<MenuItem key={name} value={name}>
-							<Checkbox checked={tags.indexOf(name) > -1} />
-							<ListItemText primary={name} />
-						</MenuItem>
-					))}
-				</Select>
-			</FormControl>
+			<Button onClick={applyNew} style={{ justifyContent: 'flex-start' }}>
+				{t('drawer.new')}
+			</Button>
+			<Divider />
+			<TextField
+				label={t('drawer.search').toUpperCase()}
+				{...searchProps}
+				type="search"
+				variant="standard"
+				sx={{
+					m: '15px'
+				}}
+			/>
+			<Divider />
+			<TagFilter tags={tags} setTags={setTags} />
 		</>
 	);
 
