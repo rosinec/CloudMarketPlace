@@ -7,6 +7,7 @@ export default {
 	'login.email': 'Email',
 	'login.password': 'Password',
 	'layout.all': 'All',
+	'layout.my-apps': 'My apps',
 	'layout.login': 'Login',
 	'layout.logout': 'Logout',
 	'layout.notFound': 'Not Found',
@@ -18,5 +19,11 @@ export default {
 	'app.docs': 'Documentation',
 	'app.more': 'Show more..',
 	'app.install': 'Install',
-	'app.uninstall': 'Uninstall'
+	'app.uninstall': 'Uninstall',
+	'drawer.reset': 'Reset all',
+	'drawer.trending': 'Trending',
+	'drawer.new': 'New',
+	'drawer.tags': 'Category',
+	'drawer.tags.clear': 'Clear',
+	'drawer.search': 'Search'
 };

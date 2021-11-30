@@ -17,8 +17,8 @@ const Login = () => {
 
 	const [isSignUp, setSignUp] = useState(false);
 
-	const [email, usernameProps] = useField('email', true);
-	const [password, passwordProps] = useField('password', true);
+	const [email, , usernameProps] = useField('email', true);
+	const [password, , passwordProps] = useField('password', true);
 
 	const [submitError, setSubmitError] = useState<string>();
 

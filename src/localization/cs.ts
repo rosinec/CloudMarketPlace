@@ -7,6 +7,7 @@ export default {
 	'login.email': 'Email',
 	'login.password': 'Heslo',
 	'layout.all': 'Vše',
+	'layout.my-apps': 'Moje aplikace',
 	'layout.login': 'Přihlásit se',
 	'layout.logout': 'Odhlásit se',
 	'layout.notFound': 'Nenalezeno',
@@ -18,5 +19,11 @@ export default {
 	'app.docs': 'Dokumentace',
 	'app.more': 'Ukázat více..',
 	'app.install': 'Instalovat',
-	'app.uninstall': 'Odinstalovat'
+	'app.uninstall': 'Odinstalovat',
+	'drawer.reset': 'Resetovat vše',
+	'drawer.trending': 'Populární',
+	'drawer.new': 'Nové',
+	'drawer.tags': 'Kategorie',
+	'drawer.tags.clear': 'Vymazat',
+	'drawer.search': 'Hledat'
 };

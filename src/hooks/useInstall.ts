@@ -22,6 +22,9 @@ const useInstall = (name: string) => {
 
 	const handleInstall = async () => {
 		setLoading(true);
+		if (user && !user?.installedApps) {
+			user.installedApps = [];
+		}
 		user?.installedApps.push({
 			name: app.name,
 			installedAt: Timestamp.now()
