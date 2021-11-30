@@ -7,6 +7,7 @@ export default {
 	'login.email': 'Email',
 	'login.password': 'Password',
 	'layout.all': 'All',
+	'layout.my-apps': 'My apps',
 	'layout.login': 'Login',
 	'layout.logout': 'Logout',
 	'layout.notFound': 'Not Found',

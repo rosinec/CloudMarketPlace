@@ -57,6 +57,14 @@ const AppFilterDrawer = () => {
 				{t('layout.all')}
 			</Button>
 			<Divider />
+			<Button
+				style={{ justifyContent: 'flex-start' }}
+				component={Link}
+				to="/myapps"
+			>
+				{t('layout.my-apps')}
+			</Button>
+			<Divider />
 			<Button onClick={resetFilters} style={{ justifyContent: 'flex-start' }}>
 				{t('drawer.reset')}
 			</Button>

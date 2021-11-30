@@ -7,6 +7,7 @@ export default {
 	'login.email': 'Email',
 	'login.password': 'Heslo',
 	'layout.all': 'Vše',
+	'layout.my-apps': 'Moje aplikace',
 	'layout.login': 'Přihlásit se',
 	'layout.logout': 'Odhlásit se',
 	'layout.notFound': 'Nenalezeno',

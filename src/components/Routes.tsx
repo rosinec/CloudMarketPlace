@@ -10,6 +10,7 @@ import {
 import { useLoggedInUser, useUsersLoading } from '../hooks/useLoggedInUser';
 import AppDetail from '../pages/AppDetail';
 import All from '../pages/All';
+import MyApps from '../pages/MyApps';
 import Login from '../pages/Login';
 import NotFound from '../pages/NotFound';
 
@@ -42,6 +43,7 @@ const Routes = () => {
 			{!user && <Route path="/login" exact component={Login} />}
 			<Route component={All} exact path="/" />
 			<AuthenticatedRoute C={AppDetail} exact path="/apps/:name" />
+			<AuthenticatedRoute C={MyApps} exact path="/myapps/" />
 			<Route component={NotFound} />
 		</Switch>
 	);
