@@ -25,5 +25,7 @@ export default {
 	'drawer.new': 'Nové',
 	'drawer.tags': 'Kategorie',
 	'drawer.tags.clear': 'Vymazat',
-	'drawer.search': 'Hledat'
+	'drawer.search': 'Hledat',
+	'app.detail.additional_info': 'Další informace',
+	'app.detail.screenshots': 'Screenshoty'
 };

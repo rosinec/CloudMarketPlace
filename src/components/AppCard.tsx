@@ -13,20 +13,25 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from '../hooks/useTranslation';
 import { App } from '../utils/firebase';
 import { DESCRIPTION_LENGTH } from '../utils/constants';
+import useAppImage from '../hooks/useAppImage';
 
 const AppCard: FC<App> = ({
 	name,
 	description,
 	website,
 	documentation,
-	tags
+	tags,
+	image
 }) => {
 	const t = useTranslation();
+
+	const imageSrc = useAppImage(image);
 
 	const descriptionShort =
 		description.length >= DESCRIPTION_LENGTH
 			? `${description.substring(0, DESCRIPTION_LENGTH)}...`
 			: description;
+
 	return (
 		<Card
 			sx={{
@@ -40,7 +45,7 @@ const AppCard: FC<App> = ({
 			<CardMedia
 				component="img"
 				height="140"
-				image="https://www.jedishop.cz/_obchody/www.jedishop.cz/prilohy/399/rick-morty-polstarek-logo-45-x-45-cm.jpg.big.jpg"
+				image={imageSrc}
 				alt="green iguana"
 			/>
 			<CardContent>

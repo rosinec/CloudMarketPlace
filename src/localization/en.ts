@@ -25,5 +25,7 @@ export default {
 	'drawer.new': 'New',
 	'drawer.tags': 'Category',
 	'drawer.tags.clear': 'Clear',
-	'drawer.search': 'Search'
+	'drawer.search': 'Search',
+	'app.detail.additional_info': 'Additional Information',
+	'app.detail.screenshots': 'Screenshots'
 };
