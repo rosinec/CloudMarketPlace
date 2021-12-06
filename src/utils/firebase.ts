@@ -1,3 +1,4 @@
+import { getStorage, ref } from '@firebase/storage';
 import { initializeApp } from 'firebase/app';
 import {
 	getAuth,
@@ -47,6 +48,11 @@ export const onAuthChanged = (callback: (u: User | null) => void) =>
 // Firestore
 const db = getFirestore();
 
+// Firebase storage
+const storage = getStorage();
+
+export const appImageRef = (file: string) => ref(storage, file);
+
 export type App = {
 	name: string;
 	connection_info: string;
@@ -55,6 +61,9 @@ export type App = {
 	tags: string[];
 	website: string;
 	added: Timestamp;
+	image: string;
+	author: string;
+	screenshots?: string[];
 };
 
 export const appsCollection = collection(

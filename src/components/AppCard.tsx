@@ -19,14 +19,15 @@ const AppCard: FC<App> = ({
 	description,
 	website,
 	documentation,
-	tags
+	tags,
+	image
 }) => {
 	const t = useTranslation();
-
 	const descriptionShort =
 		description.length >= DESCRIPTION_LENGTH
 			? `${description.substring(0, DESCRIPTION_LENGTH)}...`
 			: description;
+
 	return (
 		<Card
 			sx={{
@@ -40,7 +41,7 @@ const AppCard: FC<App> = ({
 			<CardMedia
 				component="img"
 				height="140"
-				image="https://www.jedishop.cz/_obchody/www.jedishop.cz/prilohy/399/rick-morty-polstarek-logo-45-x-45-cm.jpg.big.jpg"
+				image={image}
 				alt="green iguana"
 			/>
 			<CardContent>
