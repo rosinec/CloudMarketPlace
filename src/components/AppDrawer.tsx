@@ -21,6 +21,7 @@ const AppDrawer = () => {
 			<Button
 				sx={{ ml: '10px', justifyContent: 'flex-start' }}
 				component={Link}
+				onClick={handleDrawerToggle}
 				to="/"
 			>
 				{t('layout.all')}
@@ -29,6 +30,7 @@ const AppDrawer = () => {
 			<Button
 				sx={{ ml: '10px', justifyContent: 'flex-start' }}
 				component={Link}
+				onClick={handleDrawerToggle}
 				to="/myapps"
 			>
 				{t('layout.my-apps')}

@@ -103,7 +103,14 @@ const AppDetail: FC = () => {
 			{currentApp.screenshots ? (
 				<Box>
 					<Typography variant="h4">{t('app.detail.screenshots')}</Typography>
-					<ImageList sx={{ width: '100%', height: 450 }} cols={3}>
+					<ImageList
+						sx={{ width: '100%', height: 450 }}
+						cols={
+							currentApp.screenshots.length < 3
+								? currentApp.screenshots.length
+								: 3
+						}
+					>
 						{currentApp.screenshots?.map(item => (
 							<ImageListItem key={item}>
 								<img src={item} alt={item} loading="lazy" />
