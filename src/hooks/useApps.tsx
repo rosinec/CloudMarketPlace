@@ -8,8 +8,9 @@ import {
 	useState
 } from 'react';
 import { onSnapshot } from '@firebase/firestore';
+import { getDownloadURL } from '@firebase/storage';
 
-import { App, appsCollection } from '../utils/firebase';
+import { App, appImageRef, appsCollection } from '../utils/firebase';
 
 type ThemeState = [App[], Dispatch<SetStateAction<App[]>>, boolean];
 
@@ -21,8 +22,25 @@ export const AppProvider: FC = ({ children }) => {
 
 	useEffect(() => {
 		setLoading(true);
-		const unsubscribe = onSnapshot(appsCollection, snapshot => {
-			setApps(snapshot.docs.map(doc => doc.data()));
+		const unsubscribe = onSnapshot(appsCollection, async snapshot => {
+			const apps: App[] = await Promise.all(
+				snapshot.docs.map(async doc => {
+					const app = doc.data();
+					await getDownloadURL(appImageRef(app.image)).then(url => {
+						app.image = url;
+					});
+					if (app.screenshots) {
+						app.screenshots = await Promise.all(
+							app.screenshots.map(
+								async img =>
+									await getDownloadURL(appImageRef(img)).then(url => url)
+							)
+						);
+					}
+					return app;
+				})
+			);
+			setApps(apps);
 			setLoading(false);
 		});
 		return () => {

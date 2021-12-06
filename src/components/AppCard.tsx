@@ -13,7 +13,6 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from '../hooks/useTranslation';
 import { App } from '../utils/firebase';
 import { DESCRIPTION_LENGTH } from '../utils/constants';
-import useAppImage from '../hooks/useAppImage';
 
 const AppCard: FC<App> = ({
 	name,
@@ -24,9 +23,6 @@ const AppCard: FC<App> = ({
 	image
 }) => {
 	const t = useTranslation();
-
-	const imageSrc = useAppImage(image);
-
 	const descriptionShort =
 		description.length >= DESCRIPTION_LENGTH
 			? `${description.substring(0, DESCRIPTION_LENGTH)}...`
@@ -45,7 +41,7 @@ const AppCard: FC<App> = ({
 			<CardMedia
 				component="img"
 				height="140"
-				image={imageSrc}
+				image={image}
 				alt="green iguana"
 			/>
 			<CardContent>

@@ -12,7 +12,6 @@ import { FC, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 
 import InstallButton from '../components/InstallButton';
-import useAppImage from '../hooks/useAppImage';
 import { useAppByName } from '../hooks/useApps';
 import { useLoggedInUser } from '../hooks/useLoggedInUser';
 import usePageTitle from '../hooks/usePageTitle';
@@ -30,8 +29,6 @@ const AppDetail: FC = () => {
 		if (user?.installedApps === undefined) return null;
 		return user?.installedApps.find(app => app.name === name) ?? null;
 	}, [user]);
-	const appLogo = useAppImage(currentApp.image);
-	console.log(currentApp);
 
 	return (
 		<>
@@ -39,7 +36,11 @@ const AppDetail: FC = () => {
 				<Grid container spacing={2}>
 					<Grid item xs={12} sm={6} md={4}>
 						<Paper variant="elevation">
-							<img src={appLogo} alt="app logo" style={{ width: '100%' }} />
+							<img
+								src={currentApp.image}
+								alt="app logo"
+								style={{ width: '100%' }}
+							/>
 						</Paper>
 					</Grid>
 					<Grid item xs={12} sm={6} md={6}>
@@ -105,7 +106,7 @@ const AppDetail: FC = () => {
 					<ImageList sx={{ width: '100%', height: 450 }} cols={3}>
 						{currentApp.screenshots?.map(item => (
 							<ImageListItem key={item}>
-								<img src={useAppImage(item)} alt={item} loading="lazy" />
+								<img src={item} alt={item} loading="lazy" />
 							</ImageListItem>
 						))}
 					</ImageList>
