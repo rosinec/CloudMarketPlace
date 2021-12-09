@@ -1,11 +1,12 @@
 import { FC } from 'react';
 import {
-	AppBar,
 	Container,
 	Toolbar,
 	Box,
 	CircularProgress,
-	IconButton
+	IconButton,
+	Typography,
+	TextField
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
@@ -13,6 +14,10 @@ import { useUsersLoading } from '../hooks/useLoggedInUser';
 import { useFilterDrawer } from '../hooks/useFilterDrawer';
 import { useAppsLoading } from '../hooks/useApps';
 import { DRAWER_WIDTH } from '../utils/constants';
+import { useTranslation } from '../hooks/useTranslation';
+import useFilter from '../hooks/useFilter';
+import { AppBar } from '../utils/drawerUtils';
+import logo from '../utils/logo.png';
 
 import LanguageSwitch from './switches/LanguageSwitch';
 import ThemeSwitch from './switches/ThemeSwitch';
@@ -20,29 +25,50 @@ import LoginSwitch from './switches/LoginSwitch';
 import AppDrawer from './AppDrawer';
 
 const Layout: FC = ({ children }) => {
+	const t = useTranslation();
 	const userLoading = useUsersLoading();
 	const appsLoading = useAppsLoading();
 
-	const [, handleDrawerToggle] = useFilterDrawer();
+	const [mobileOpen, handleDrawerToggle] = useFilterDrawer();
+
+	const [, , searchProps, ,] = useFilter();
 
 	return (
 		<>
-			<AppBar
-				color="default"
-				position="sticky"
-				sx={{ zIndex: theme => theme.zIndex.drawer + 1 }}
-			>
+			<AppBar color="default" position="sticky" open={mobileOpen}>
 				<Container maxWidth={false}>
 					<Toolbar disableGutters sx={{ gap: 2 }}>
 						<IconButton
 							color="inherit"
 							aria-label="open drawer"
-							edge="start"
 							onClick={handleDrawerToggle}
-							sx={{ mr: 2, display: { sm: 'none' } }}
+							edge="start"
+							sx={{
+								marginRight: '36px',
+								...(mobileOpen && { display: 'none' })
+							}}
 						>
 							<MenuIcon />
 						</IconButton>
+						<img
+							src={logo}
+							alt="Cloud marketplace!"
+							className="logo"
+							style={{ width: '56px' }}
+						/>
+						<Typography variant="h5" sx={{ width: '25%' }}>
+							Cloud Marketplace
+						</Typography>
+						<TextField
+							label={t('drawer.search').toUpperCase()}
+							{...searchProps}
+							type="search"
+							variant="standard"
+							sx={{
+								width: ['100%', '50%', '50%'],
+								mb: 1
+							}}
+						/>
 						<Box sx={{ flexGrow: 1 }} />
 						<LanguageSwitch />
 						<ThemeSwitch />

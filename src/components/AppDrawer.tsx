@@ -1,108 +1,47 @@
-import { Box, Button, Toolbar, Drawer, TextField } from '@mui/material';
+import {
+	IconButton,
+	List,
+	ListItemIcon,
+	ListItemText,
+	ListItemButton
+} from '@mui/material';
 import Divider from '@mui/material/Divider';
 import { Link } from 'react-router-dom';
+import { Apps, ChevronRight, Home } from '@mui/icons-material';
 
 import { useFilterDrawer } from '../hooks/useFilterDrawer';
-import { DRAWER_WIDTH } from '../utils/constants';
 import { useTranslation } from '../hooks/useTranslation';
-import useFilter from '../hooks/useFilter';
-
-import TagFilter from './TagFilter';
+// import useFilter from '../hooks/useFilter';
+import { DrawerHeader, Drawer } from '../utils/drawerUtils';
 
 const AppDrawer = () => {
 	const t = useTranslation();
 	const [mobileOpen, handleDrawerToggle] = useFilterDrawer();
 
-	const [tags, setTags, searchProps, applyNew, resetFilters] = useFilter();
+	// const [tags, setTags, , applyNew, resetFilters] = useFilter();
 
-	const drawer = (
-		<>
-			<Toolbar />
-			<Button
-				sx={{ ml: '10px', justifyContent: 'flex-start' }}
-				component={Link}
-				onClick={handleDrawerToggle}
-				to="/"
-			>
-				{t('layout.all')}
-			</Button>
-			<Divider />
-			<Button
-				sx={{ ml: '10px', justifyContent: 'flex-start' }}
-				component={Link}
-				onClick={handleDrawerToggle}
-				to="/myapps"
-			>
-				{t('layout.my-apps')}
-			</Button>
-			<Divider />
-			<Divider />
-			<Button sx={{ ml: '10px', justifyContent: 'flex-start' }}>
-				{t('drawer.trending')}
-			</Button>
-			<Divider />
-			<Button
-				onClick={applyNew}
-				sx={{ ml: '10px', justifyContent: 'flex-start' }}
-			>
-				{t('drawer.new')}
-			</Button>
-			<Divider />
-			<TextField
-				label={t('drawer.search').toUpperCase()}
-				{...searchProps}
-				type="search"
-				variant="standard"
-				sx={{
-					m: '15px'
-				}}
-			/>
-			<Divider />
-			<TagFilter tags={tags} setTags={setTags} />
-			<Button
-				onClick={resetFilters}
-				sx={{ ml: '10px', justifyContent: 'flex-start' }}
-			>
-				{t('drawer.reset')}
-			</Button>
-		</>
-	);
-
-	const container = window !== undefined ? () => document.body : undefined;
+	const items = [
+		{ to: '/', icon: <Home />, text: t('layout.all') },
+		{ to: '/myapps', icon: <Apps />, text: t('layout.my-apps') }
+	];
 
 	return (
-		<Box
-			component="nav"
-			sx={{ width: { sm: DRAWER_WIDTH }, flexShrink: { sm: 0 } }}
-			aria-label="mailbox folders"
-		>
-			{/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-			<Drawer
-				container={container}
-				variant="temporary"
-				open={mobileOpen}
-				onClose={handleDrawerToggle}
-				ModalProps={{
-					keepMounted: true // Better open performance on mobile.
-				}}
-				sx={{
-					'display': { xs: 'block', sm: 'none' },
-					'& .MuiDrawer-paper': { boxSizing: 'border-box', width: DRAWER_WIDTH }
-				}}
-			>
-				{drawer}
-			</Drawer>
-			<Drawer
-				variant="permanent"
-				sx={{
-					'display': { xs: 'none', sm: 'block' },
-					'& .MuiDrawer-paper': { boxSizing: 'border-box', width: DRAWER_WIDTH }
-				}}
-				open
-			>
-				{drawer}
-			</Drawer>
-		</Box>
+		<Drawer variant="permanent" open={mobileOpen}>
+			<DrawerHeader>
+				<IconButton onClick={handleDrawerToggle}>
+					<ChevronRight />
+				</IconButton>
+			</DrawerHeader>
+			<Divider />
+			<List>
+				{items.map((item, index) => (
+					<ListItemButton key={index} to={item.to} component={Link}>
+						<ListItemIcon>{item.icon}</ListItemIcon>
+						<ListItemText primary={item.text} />
+					</ListItemButton>
+				))}
+			</List>
+		</Drawer>
 	);
 };
 

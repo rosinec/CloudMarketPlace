@@ -1,6 +1,7 @@
 export default {
 	'home.welcome': 'Výtej, ',
 	'error.unknown': 'Došlo k neznámé chybě',
+	'app.title': 'Cloud obchod',
 	'error.signIn': 'Nejste přihlášeni',
 	'login.signIn': 'Přihlásit se',
 	'login.signUp': 'Zaregistrovat se',

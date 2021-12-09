@@ -1,5 +1,6 @@
 export default {
 	'home.welcome': 'Welcome, ',
+	'app.title': 'Cloud Marketplace',
 	'error.unknown': 'Unknown error occurred',
 	'error.signIn': 'You are not signed in',
 	'login.signIn': 'Sign in',
