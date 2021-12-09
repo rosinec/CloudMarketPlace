@@ -64,6 +64,8 @@ export type App = {
 	image: string;
 	author: string;
 	screenshots?: string[];
+	featured?: boolean;
+	featured_desc?: string;
 };
 
 export const appsCollection = collection(
