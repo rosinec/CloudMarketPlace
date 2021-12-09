@@ -14,14 +14,7 @@ import { useTranslation } from '../hooks/useTranslation';
 import { App } from '../utils/firebase';
 import { DESCRIPTION_LENGTH } from '../utils/constants';
 
-const AppCard: FC<App> = ({
-	name,
-	description,
-	website,
-	documentation,
-	tags,
-	image
-}) => {
+const AppCard: FC<App> = ({ name, description, tags, image }) => {
 	const t = useTranslation();
 	const descriptionShort =
 		description.length >= DESCRIPTION_LENGTH
@@ -40,7 +33,7 @@ const AppCard: FC<App> = ({
 		>
 			<CardMedia
 				component="img"
-				height="140"
+				height="190"
 				image={image}
 				alt="green iguana"
 				sx={{ objectFit: 'contain' }}
@@ -48,41 +41,34 @@ const AppCard: FC<App> = ({
 			<CardContent>
 				<Typography gutterBottom variant="h5" component="div">
 					{name}
-					{tags.slice(0, 2).map((tag, index) => (
-						<Chip
-							sx={{ ml: 1 }}
-							key={index}
-							label={tag}
-							size="small"
-							variant="outlined"
-						/>
-					))}
 				</Typography>
 				<Typography variant="body2" color="text.secondary">
 					{descriptionShort}
+					<Typography variant="body2" sx={{ mt: 1 }}>
+						{tags.slice(0, 2).map((tag, index) => (
+							<Chip
+								sx={{ mr: 1 }}
+								key={index}
+								label={tag}
+								size="small"
+								variant="outlined"
+							/>
+						))}
+					</Typography>
 				</Typography>
 			</CardContent>
 
 			<div>
 				<CardActions>
-					<Button size="small" onClick={() => window.open(website, '_blank')}>
-						{t('app.web')}
-					</Button>
 					<Button
-						size="small"
-						onClick={() => window.open(documentation, '_blank')}
+						variant="contained"
+						fullWidth
+						component={Link}
+						to={`/apps/${name}`}
 					>
-						{t('app.docs')}
+						{t('app.more')}
 					</Button>
 				</CardActions>
-				<Button
-					variant="contained"
-					fullWidth
-					component={Link}
-					to={`apps/${name}`}
-				>
-					{t('app.more')}
-				</Button>
 			</div>
 		</Card>
 	);

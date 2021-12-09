@@ -54,7 +54,7 @@ const Layout: FC = ({ children }) => {
 							src={logo}
 							alt="Cloud marketplace!"
 							className="logo"
-							style={{ width: '56px' }}
+							style={{ width: '100px' }}
 						/>
 						<Typography variant="h5" sx={{ width: '25%' }}>
 							{t('app.title')}

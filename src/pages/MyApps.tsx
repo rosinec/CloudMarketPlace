@@ -9,7 +9,7 @@ import { useLoggedInUser } from '../hooks/useLoggedInUser';
 const MyApps = () => {
 	const t = useTranslation();
 	const user = useLoggedInUser();
-	usePageTitle(t('layout.my-apps'));
+	usePageTitle(t('drawer.my-apps'));
 
 	const isUserInstalledApp = (name: string) => {
 		if (user?.installedApps === undefined) return false;

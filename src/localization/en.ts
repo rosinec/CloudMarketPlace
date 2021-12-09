@@ -8,13 +8,14 @@ export default {
 	'login.email': 'Email',
 	'login.password': 'Password',
 	'layout.all': 'All',
-	'layout.my-apps': 'My apps',
+	'drawer.my-apps': 'My apps',
 	'layout.login': 'Login',
 	'layout.logout': 'Logout',
 	'layout.notFound': 'Not Found',
 	'layout.my-apps.no-instaled': 'No apps are installed :(',
 	'layout.my-apps.start': 'Start by visiting',
 	'layout.my-apps.marketplace': 'marketplace',
+	'layout.add_app': 'Add an application',
 	'theme.light': 'Light theme',
 	'theme.dark': 'Dark theme',
 	'language.cs': 'Czech',
@@ -30,6 +31,7 @@ export default {
 	'drawer.tags': 'Category',
 	'drawer.tags.clear': 'Clear',
 	'drawer.search': 'Search',
+	'drawer.desktops': 'Desktops',
 	'app.detail.additional_info': 'Additional Information',
 	'app.detail.screenshots': 'Screenshots'
 };

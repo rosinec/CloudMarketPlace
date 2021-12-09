@@ -17,7 +17,7 @@ const MenuProps = {
 	PaperProps: {
 		style: {
 			maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-			width: 200
+			width: 250
 		}
 	}
 };
@@ -46,7 +46,7 @@ const TagFilter = ({ tags, setTags }: Props) => {
 	};
 
 	return (
-		<FormControl sx={{ mt: '30px', width: 180 }}>
+		<FormControl sx={{ mt: '20px', width: 180 }}>
 			<Button
 				sx={{
 					width: '20px',

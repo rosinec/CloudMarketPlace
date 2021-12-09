@@ -8,20 +8,23 @@ import { UserProvider } from './hooks/useLoggedInUser';
 import { ThemeProvider } from './hooks/useTheme';
 import { AppProvider } from './hooks/useApps';
 import { FilterDrawerProvider } from './hooks/useFilterDrawer';
+import { CategoryProvider } from './hooks/useCategory';
 
 const App = () => (
 	<UserProvider>
 		<LanguageProvider>
 			<ThemeProvider>
 				<AppProvider>
-					<FilterDrawerProvider>
-						<BrowserRouter>
-							<CssBaseline />
-							<Layout>
-								<Routes />
-							</Layout>
-						</BrowserRouter>
-					</FilterDrawerProvider>
+					<CategoryProvider>
+						<FilterDrawerProvider>
+							<BrowserRouter>
+								<CssBaseline />
+								<Layout>
+									<Routes />
+								</Layout>
+							</BrowserRouter>
+						</FilterDrawerProvider>
+					</CategoryProvider>
 				</AppProvider>
 			</ThemeProvider>
 		</LanguageProvider>

@@ -1,4 +1,4 @@
-import { getStorage, ref } from '@firebase/storage';
+import { getStorage, ref, uploadBytes } from '@firebase/storage';
 import { initializeApp } from 'firebase/app';
 import {
 	getAuth,
@@ -9,6 +9,7 @@ import {
 	User
 } from 'firebase/auth';
 import {
+	addDoc,
 	collection,
 	CollectionReference,
 	doc,
@@ -53,6 +54,12 @@ const storage = getStorage();
 
 export const appImageRef = (file: string) => ref(storage, file);
 
+export const uploadImage = async (appName: string, image: File) =>
+	await uploadBytes(
+		ref(storage, `/app_icons/${appName.normalize()}/${image.name}`),
+		image
+	);
+
 export type App = {
 	name: string;
 	connection_info: string;
@@ -68,10 +75,24 @@ export type App = {
 	featured_desc?: string;
 };
 
+export type Category = {
+	name: string;
+	title: string;
+	description: string;
+};
+
 export const appsCollection = collection(
 	db,
 	'apps'
 ) as CollectionReference<App>;
+
+export const categoryCollection = collection(
+	db,
+	'categories'
+) as CollectionReference<Category>;
+
+export const addApp = async (app: App) =>
+	(await addDoc(appsCollection, app)).id;
 
 export const appsDocument = (id: string) =>
 	doc(db, 'apps', id) as DocumentReference<App>;

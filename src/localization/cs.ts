@@ -8,13 +8,14 @@ export default {
 	'login.email': 'Email',
 	'login.password': 'Heslo',
 	'layout.all': 'Vše',
-	'layout.my-apps': 'Moje aplikace',
+	'drawer.my-apps': 'Moje aplikace',
 	'layout.login': 'Přihlásit se',
 	'layout.logout': 'Odhlásit se',
 	'layout.notFound': 'Nenalezeno',
 	'layout.my-apps.no-instaled': 'Zadne nenainstalovane aplikace :(',
 	'layout.my-apps.start': 'Zacnete prehledem v',
 	'layout.my-apps.marketplace': 'obchode aplikaci',
+	'layout.add_app': 'Pridat aplikaci',
 	'theme.light': 'Světlé téma',
 	'theme.dark': 'Tmavé téma',
 	'language.cs': 'Čeština',
@@ -30,6 +31,7 @@ export default {
 	'drawer.tags': 'Kategorie',
 	'drawer.tags.clear': 'Vymazat',
 	'drawer.search': 'Hledat',
+	'drawer.desktops': 'Virtualni Pocitace',
 	'app.detail.additional_info': 'Další informace',
 	'app.detail.screenshots': 'Screenshoty'
 };
