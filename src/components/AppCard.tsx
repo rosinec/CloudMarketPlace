@@ -43,6 +43,7 @@ const AppCard: FC<App> = ({
 				height="140"
 				image={image}
 				alt="green iguana"
+				sx={{ objectFit: 'contain' }}
 			/>
 			<CardContent>
 				<Typography gutterBottom variant="h5" component="div">

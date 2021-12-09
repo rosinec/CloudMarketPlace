@@ -57,7 +57,7 @@ const Layout: FC = ({ children }) => {
 							style={{ width: '56px' }}
 						/>
 						<Typography variant="h5" sx={{ width: '25%' }}>
-							Cloud Marketplace
+							{t('app.title')}
 						</Typography>
 						<TextField
 							label={t('drawer.search').toUpperCase()}
