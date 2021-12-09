@@ -60,7 +60,9 @@ const AppDetail: FC = () => {
 										</span>
 									))}
 									{currentApp.tags.length > 2 ? (
-										<span>+{currentApp.tags.length - 2} more</span>
+										<span>
+											+{currentApp.tags.length - 2} {t('app.moreText')}
+										</span>
 									) : (
 										''
 									)}
@@ -93,7 +95,7 @@ const AppDetail: FC = () => {
 				</Grid>
 				{installedApp !== null && (
 					<p>
-						Installed at{' '}
+						{t('app.installed')}{' '}
 						{new Date(installedApp.installedAt.toMillis())
 							.toISOString()
 							.substring(0, 10)}

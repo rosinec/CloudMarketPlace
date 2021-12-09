@@ -61,7 +61,7 @@ const AppDrawer = () => {
 					aria-labelledby="nested-list-subheader"
 					subheader={
 						<ListSubheader component="div" id="nested-list-subheader">
-							My profile
+							{t('drawer.profile')}
 						</ListSubheader>
 					}
 				>
@@ -82,7 +82,7 @@ const AppDrawer = () => {
 					aria-labelledby="nested-list-subheader"
 					subheader={
 						<ListSubheader component="div" id="nested-list-subheader">
-							Admin
+							{t('drawer.admin')}
 						</ListSubheader>
 					}
 				>

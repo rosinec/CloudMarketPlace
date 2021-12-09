@@ -19,7 +19,7 @@ const AppFeatured: FC<App> = ({ name, tags, image, featured_desc }) => {
 	return (
 		<>
 			<Typography variant="h4">
-				Featured in <b>{tags[0]}</b>
+				{t('all.featured')} <b>{tags[0]}</b>
 			</Typography>
 			<Card
 				sx={{

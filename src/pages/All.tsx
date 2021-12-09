@@ -19,7 +19,7 @@ const All = () => {
 	return (
 		<>
 			<Toolbar sx={{ backgroundColor: 'background.paper' }}>
-				<Typography variant="h5">Filter</Typography>
+				<Typography variant="h5">{t('all.filter')}</Typography>
 				<TagFilter tags={tags} setTags={setTags} />
 				<Divider
 					orientation="vertical"
@@ -30,7 +30,7 @@ const All = () => {
 			{featured ? <AppFeatured {...featured} /> : ''}
 			<Box sx={{ mt: 3 }}>
 				<Typography variant="h4" sx={{ mb: 2 }}>
-					Available for you
+					{t('all.available')}
 				</Typography>
 				<Grid container spacing={2}>
 					{apps.map((app, index) => (
@@ -42,7 +42,10 @@ const All = () => {
 			</Box>
 			<Box sx={{ mt: 3 }}>
 				<Typography variant="h4" sx={{ mb: 2 }}>
-					Do <b>GREAT</b> things with your <b>Cloud PC!</b>
+					<div
+						className="content"
+						dangerouslySetInnerHTML={{ __html: t('all.pc') }}
+					/>
 				</Typography>
 				<Grid container spacing={2}>
 					{apps

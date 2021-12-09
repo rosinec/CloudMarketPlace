@@ -65,19 +65,18 @@ const AddApp = () => {
 			console.log('Error.');
 			setSaveStatus({
 				status: 'error',
-				message: `Error while trying to save data, empty image, name of application or description.`
+				message: ``
 			});
 			return;
 		}
-		console.log('Saving in progress.');
+
 		const imgId: string = await uploadImage(appName, img)
 			.then(a => `${a.ref.fullPath}`)
-			.catch(e => {
+			.catch(() => {
 				setSaveStatus({
 					status: 'error',
-					message: `Error while trying to save image to cloud storage, see the debug console for more info.`
+					message: t('error.saveCloud')
 				});
-				console.log(e);
 				return '';
 			});
 		const _appId = await addApp({
@@ -97,15 +96,14 @@ const AddApp = () => {
 				setSaveProgress(false);
 				setSaveStatus({
 					status: 'success',
-					message: `Application successfully stored to databse, it's id: ${a}.`
+					message: `${t('success.saveDB')}${a}.`
 				});
 			})
-			.catch(e => {
+			.catch(() => {
 				setSaveStatus({
 					status: 'error',
-					message: `Error while trying to save application to databse. See the debug console for more info.`
+					message: t('error.saveDB')
 				});
-				console.log(e);
 			})
 			.finally(() => setSaveProgress(false));
 	};
@@ -137,50 +135,46 @@ const AddApp = () => {
 							setSaveStatus({ status: 'none' });
 						}}
 					>
-						Close
+						{t('add.close')}
 					</Button>
 				</DialogActions>
 			</Dialog>
-			<Typography variant="h3">Add new app</Typography>
+			<Typography variant="h3">{t('add.add')}</Typography>
 			<Grid container sx={{ mt: 3 }} spacing={2} rowSpacing={1}>
 				<Grid item md={8}>
 					<Typography variant="h5" sx={{ mb: 2 }}>
-						App details
+						{t('add.detail')}
 					</Typography>
 					<Grid container spacing={2} rowSpacing={1}>
 						<Grid item md={6}>
-							<TextField fullWidth label="Application name" {...appNameProps} />
+							<TextField fullWidth label={t('add.name')} {...appNameProps} />
 						</Grid>
 						<Grid item md={6}>
 							<TextField
 								fullWidth
-								label="Author or vendor"
+								label={t('add.author')}
 								{...appAuthorProps}
 							/>
 						</Grid>
 						<Grid item md={6}>
-							<TextField
-								fullWidth
-								label="URL to Documentation"
-								{...appDocsUrlProps}
-							/>
+							<TextField fullWidth label={t('add.doc')} {...appDocsUrlProps} />
 						</Grid>
 						<Grid item md={6}>
-							<TextField fullWidth label="URL to Website" {...appWebUrlProps} />
+							<TextField fullWidth label={t('add.web')} {...appWebUrlProps} />
 						</Grid>
 						<Grid item md={12}>
 							<Typography variant="h5" sx={{ mb: 2 }}>
-								Taxonomy
+								{t('add.tax')}
 							</Typography>
 							<TextField
 								fullWidth
-								label="App categories"
+								label={t('add.category')}
 								{...appCategoriesProps}
 							/>
 						</Grid>
 						<Grid item md={12}>
 							<Typography variant="h5" sx={{ mb: 2 }}>
-								Metadata
+								{t('add.meta')}
 							</Typography>
 							<FormControlLabel
 								control={
@@ -193,13 +187,13 @@ const AddApp = () => {
 										)}
 									/>
 								}
-								label="Featured app"
+								label={t('add.featured')}
 							/>
 							{featured ? (
 								<TextField
 									fullWidth
 									multiline
-									label="Featured text"
+									label={t('add.featuredText')}
 									{...appFeaturedTextProps}
 								/>
 							) : (
@@ -224,7 +218,7 @@ const AddApp = () => {
 					/>
 					<label htmlFor="raised-button-file">
 						<Button variant="contained" component="span">
-							Upload
+							{t('add.upload')}
 						</Button>
 					</label>
 					{objectURL ? (
@@ -235,7 +229,7 @@ const AddApp = () => {
 							sx={{ ml: 2 }}
 							onClick={() => setImg(undefined)}
 						>
-							Remove
+							{t('add.remove')}
 						</Button>
 					) : (
 						''
@@ -246,7 +240,7 @@ const AddApp = () => {
 				<Grid item md={12}>
 					<TextField
 						fullWidth
-						label="Application description"
+						label={t('add.description')}
 						multiline
 						{...appDescriptonProps}
 					/>
@@ -254,14 +248,14 @@ const AddApp = () => {
 				<Grid item md={12}>
 					<TextField
 						fullWidth
-						label="Connection info"
+						label={t('add.connection')}
 						multiline
 						{...appAdditionalInfoProps}
 					/>
 				</Grid>
 				<Grid item md={12}>
 					<Button variant="contained" component="span" onClick={handleSave}>
-						Save new app
+						{t('add.save')}
 					</Button>
 				</Grid>
 			</Grid>
