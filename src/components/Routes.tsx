@@ -15,6 +15,7 @@ import Login from '../pages/Login';
 import NotFound from '../pages/NotFound';
 import AddApp from '../pages/AddApp';
 import Trending from '../pages/Trending';
+import AddCategory from '../pages/AddCategory';
 
 type Props = {
 	C: FC;
@@ -58,6 +59,7 @@ const Routes = () => {
 		<Switch>
 			{!user && <Route path="/login" exact component={Login} />}
 			<Route component={All} exact path="/" />
+			<AuthenticatedRoute C={AddCategory} exact path="/category/add" />
 			<Route component={Trending} exact path="/category/:name" />
 			<AdminRoute C={AddApp} exact path="/apps/add" />
 			<AuthenticatedRoute C={AppDetail} exact path="/apps/:name" />

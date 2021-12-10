@@ -9,9 +9,9 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
 import { Dispatch, SetStateAction } from 'react';
 
-import { useTags } from '../hooks/useApps';
 import { useTranslation } from '../hooks/useTranslation';
 import { ITEM_HEIGHT, ITEM_PADDING_TOP } from '../utils/constants';
+import { useCategory } from '../hooks/useCategory';
 
 const MenuProps = {
 	PaperProps: {
@@ -29,7 +29,7 @@ type Props = {
 
 const TagFilter = ({ tags, setTags }: Props) => {
 	const t = useTranslation();
-	const allTags = useTags();
+	const [categories, ,] = useCategory();
 
 	const handleFilterChange = (event: SelectChangeEvent<string[]>) => {
 		const {
@@ -46,7 +46,7 @@ const TagFilter = ({ tags, setTags }: Props) => {
 	};
 
 	return (
-		<FormControl sx={{ mt: '20px', width: 180 }}>
+		<FormControl sx={{ mt: '20px', width: '33%' }}>
 			<Button
 				sx={{
 					width: '20px',
@@ -89,10 +89,10 @@ const TagFilter = ({ tags, setTags }: Props) => {
 				)}
 				MenuProps={MenuProps}
 			>
-				{Array.from(allTags.values()).map(name => (
-					<MenuItem key={name} value={name}>
-						<Checkbox checked={tags.indexOf(name) > -1} />
-						<ListItemText primary={name} />
+				{categories.map(tag => (
+					<MenuItem key={tag.name} value={tag.name}>
+						<Checkbox checked={tags.indexOf(tag.name) > -1} />
+						<ListItemText primary={tag.name} secondary={tag.title} />
 					</MenuItem>
 				))}
 			</Select>
