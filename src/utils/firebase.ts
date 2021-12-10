@@ -94,6 +94,9 @@ export const categoryCollection = collection(
 export const addApp = async (app: App) =>
 	(await addDoc(appsCollection, app)).id;
 
+export const addCategory = async (category: Category) =>
+	(await addDoc(categoryCollection, category)).id;
+
 export const appsDocument = (id: string) =>
 	doc(db, 'apps', id) as DocumentReference<App>;
 
