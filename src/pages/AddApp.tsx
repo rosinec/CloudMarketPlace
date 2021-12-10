@@ -10,7 +10,15 @@ import {
 	DialogContent,
 	DialogActions,
 	CircularProgress,
-	DialogTitle
+	DialogTitle,
+	Chip,
+	Input,
+	ListItemText,
+	MenuItem,
+	Select,
+	SelectChangeEvent,
+	InputLabel,
+	FormControl
 } from '@mui/material';
 import { ChangeEvent, useCallback, useMemo, useState } from 'react';
 import { Timestamp } from '@firebase/firestore';
@@ -20,6 +28,7 @@ import usePageTitle from '../hooks/usePageTitle';
 import upload from '../utils/upload_placeholder.png';
 import useField from '../hooks/useField';
 import { addApp, uploadImage } from '../utils/firebase';
+import { useCategory } from '../hooks/useCategory';
 
 const AddApp = () => {
 	const t = useTranslation();
@@ -34,11 +43,9 @@ const AddApp = () => {
 	const [appAuthor, , appAuthorProps] = useField('author', true);
 	const [appDocsUrl, , appDocsUrlProps] = useField('docsUrl', true);
 	const [appWebUrl, , appWebUrlProps] = useField('webUrl', true);
-	const [appCategories, , appCategoriesProps] = useField('categories', true);
-	const tags = useMemo<string[]>(
-		() => appCategories.split(';'),
-		[appCategories]
-	);
+	const [appCategories, setAppCategories] = useState<string[]>([]);
+	const [tags, ,] = useCategory();
+
 	const [featured, setFeatured] = useState(false);
 	const [appFeaturedText, , appFeaturedTextProps] = useField(
 		'featuredText',
@@ -59,6 +66,16 @@ const AddApp = () => {
 	const [saveStatus, setSaveStatus] = useState<SavingStatus>({
 		status: 'none'
 	});
+	const handleCategoryChange = (event: SelectChangeEvent<string[]>) => {
+		const {
+			target: { value }
+		} = event;
+		setAppCategories(
+			// On autofill we get a the stringified value.
+			typeof value === 'string' ? value.split(',') : value
+		);
+	};
+
 	const handleSave = async () => {
 		setSaveProgress(true);
 		if (!img || !appName || !appDescription) {
@@ -84,7 +101,7 @@ const AddApp = () => {
 			author: appAuthor,
 			documentation: appDocsUrl,
 			website: appWebUrl,
-			tags,
+			tags: appCategories,
 			featured,
 			featured_desc: appFeaturedText,
 			description: appDescription,
@@ -162,15 +179,52 @@ const AddApp = () => {
 						<Grid item md={6}>
 							<TextField fullWidth label={t('add.web')} {...appWebUrlProps} />
 						</Grid>
-						<Grid item md={12}>
+						<Grid item md={6}>
 							<Typography variant="h5" sx={{ mb: 2 }}>
 								{t('add.tax')}
 							</Typography>
-							<TextField
+							{/* <TextField
 								fullWidth
 								label={t('add.category')}
 								{...appCategoriesProps}
-							/>
+							/> */}
+							<FormControl sx={{ mt: 1 }} fullWidth>
+								<InputLabel id="tags-checkbox-label" required>
+									{t('drawer.tags')}
+								</InputLabel>
+								<Select
+									labelId="tags-checkbox-label"
+									id="tags-checkbox"
+									multiple
+									variant="standard"
+									label={t('drawer.tags')}
+									value={appCategories}
+									onChange={handleCategoryChange}
+									input={<Input sx={{ p: '10px' }} />}
+									renderValue={selected => (
+										<Box
+											sx={{
+												display: 'flex',
+												flexWrap: 'wrap',
+												gap: 0.5
+											}}
+										>
+											{selected.map(value => (
+												<Chip key={value} label={value} />
+											))}
+										</Box>
+									)}
+								>
+									{tags.map(tag => (
+										<MenuItem key={tag.name} value={tag.name}>
+											<Checkbox
+												checked={appCategories.indexOf(tag.name) > -1}
+											/>
+											<ListItemText primary={tag.name} secondary={tag.title} />
+										</MenuItem>
+									))}
+								</Select>
+							</FormControl>
 						</Grid>
 						<Grid item md={12}>
 							<Typography variant="h5" sx={{ mb: 2 }}>

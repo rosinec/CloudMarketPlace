@@ -14,7 +14,8 @@ import {
 	ChevronRight,
 	Home,
 	Whatshot,
-	Computer
+	Computer,
+	Category
 } from '@mui/icons-material';
 
 import { useFilterDrawer } from '../hooks/useFilterDrawer';
@@ -41,7 +42,8 @@ const AppDrawer = () => {
 		{ to: '/myapps', icon: <Apps />, text: t('drawer.my-apps') }
 	];
 	const adminItems = [
-		{ to: '/apps/add', icon: <AppRegistration />, text: t('layout.all') }
+		{ to: '/apps/add', icon: <AppRegistration />, text: t('layout.all') },
+		{ to: '/category/add', icon: <Category />, text: t('cat.add') }
 	];
 
 	return (
