@@ -45,6 +45,5 @@ export const useCategoryLoading = () => {
 
 export const useCategoryByName = (name: string) => {
 	const [categories] = useContext(CategoryContext);
-	console.log(categories);
 	return categories.find(category => category.name === name) ?? undefined;
 };
